@@ -1,17 +1,17 @@
 # ASET-Project
 
-## Theme
+### Theme
 ### To be decided
 
-## Team members
+# Team members
 ### Aparaschivei Sebastian-Nicolae
 ### Balan Marius-Alexandru
 ### Craciun Ioan-Paul
 
-## Coordinator
+# Coordinator
 ### Waiting for response
 
-## Contact information
+# Contact information
 ### Aparaschivei Sebastian-Nicolae
 
 ### Balan Marius-Alexandru

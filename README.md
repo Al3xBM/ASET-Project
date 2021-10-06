@@ -1,7 +1,7 @@
 # ASET-Project
 
 ### Theme
-### To be decided
+### Visual Twitter
 
 # Team members
 ### Aparaschivei Sebastian-Nicolae
@@ -9,7 +9,7 @@
 ### Craciun Ioan-Paul
 
 # Coordinator
-### Waiting for response
+### Adrian Iftene
 
 # Contact information
 ### Aparaschivei Sebastian-Nicolae

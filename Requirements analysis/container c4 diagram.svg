@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="843px" preserveAspectRatio="none" style="width:1055px;height:843px;background:#FFFFFF;" version="1.1" viewBox="0 0 1055 843" width="1055px" zoomAndPan="magnify"><defs/><g><text fill="#000000" font-family="sans-serif" font-size="18" lengthAdjust="spacing" textLength="420" x="311" y="18.6855">Container diagram for Visual Twitter Web Application</text><!--MD5=[64e2e010ba86d7988e5cd73bd64f61f9]
+cluster ui--><rect fill="#FFFFFF" height="269" style="stroke:#444444;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="238" x="367" y="220.6406"/><text fill="#444444" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="110" x="431" y="249.25">UI Component</text><text fill="#444444" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="462.5" y="265.2227">[System]</text><!--MD5=[525d870916ccdd7974a5fa33b128e48b]
+cluster twiter_api--><rect fill="#FFFFFF" height="269" style="stroke:#444444;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="232" x="451" y="568.6406"/><text fill="#444444" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="176" x="479" y="597.25">Twitter API Component</text><text fill="#444444" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="543.5" y="613.2227">[System]</text><!--MD5=[ae7709657f611b622ade1638c535e86e]
+cluster cluster--><rect fill="#FFFFFF" height="588.5" style="stroke:#444444;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="228" x="821" y="220.6406"/><text fill="#444444" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="173" x="848.5" y="249.25">Clustering Component</text><text fill="#444444" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="911.5" y="265.2227">[System]</text><!--MD5=[d07e253d10961917b6ba13a2e9b893a1]
+cluster user_service--><rect fill="#FFFFFF" height="622.5" style="stroke:#444444;stroke-width:1.0;stroke-dasharray:7.0,7.0;" width="252" x="7" y="210.6406"/><text fill="#444444" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="189" x="38.5" y="249.25">User service Component</text><text fill="#444444" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="47" x="109.5" y="265.2227">[System]</text><!--MD5=[4f545ad8236e80833223489a6c49a777]
+entity page--><rect fill="#438DD5" height="188.75" style="stroke:#3C7FC0;stroke-width:1.5;" width="206" x="383" y="284.6406"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="453.5" y="307.0977">«container»</text><image height="48" width="48" x="462" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAADHUlEQVR4Xu2YT4oVMRDG5245gBd4B5gLzAE8gK5ciTsXs3D5dq7EneDGhcgThAEZGBhQVFAEof3oH68oq5J0Rtt/0OHj0Z1UJV/qX9LvpNx5+U/hJHf9XWyElrARWsJ/Tuju48vzZ9f6PX34Jo96SMCE82gHo4R2D15//PJtcu1w9blKS50a8pKX77/euvcqS1YxSog17j+9ErOzRxf7F+9YTDbwYtavB4lJWCp6fX7xKc9ZxRAhzZsn1aZhSb+96lfyXvLJ4YP6B400ROj2/q1mrEaDLIRTBAyTZVCXwfJQxhAhUenMCKcpuc8gxdZ+MlYgZCGshzxa5jBfmRA2128eIj7kKcK5Grwd9YwhQmxR+RL6QwbpoSNWrREZQ4QEzShj8Ezm40f6sRDWgpOWt7RaP8sEqmKoeItNWlLRr5DnrGKBkCyBI6xpARmDJFdayVqCdi/wbIVAYtK1+q4H9YQSldEkJCo+fYhZEps6qSWzFoAuQUMASd1mE8tOPNUJWWnxe9IWIYHNbFLZRuwFixKSgCogFfOXprKzJcc+qBBCJ58AZqTJBbh4eKdYrSKQEQ7lW9NirWohjYT85gLwFA2uMkm4AugVO2VhDzv48lAkxJ5aRRln2Y45E0Iz3U6pNN3suJsRYls3IlQ1tulmr0VCHZcxRPORbp3T7DL6+y4rx73ldIuEirtRBOmfCGrLeT+PBXXoBxVC5Vg8WNhoWcElkrxbSXv/Oh2jJ6S9HS/ZWaBOqMwOshqtSS2NmZfOrAUojHiKvUndl9lWjJYOIUAp84ESjg7x3s0nBtCredyToGmHHSpggZABf/mzabAd1j1cgerY5AK5HD+7WFIGk1UEOxb4cAvXjzxtFUOEWkUMTuGClq+q61/QOnfQcIX1VhxRzxgi9IuXfAycLVfFCoTsrtIqLesT6syIp/ofiv39BAwRIsvCuW0nAP2SIagP6SJFf/VEyxgiVNwnzm7+5GidAOa+/Y9/NrTCK2OUkAyAU6y1rsan6e8YVcVB85RxQuBs/hxTAi8uQOU8/31/WP0xbISWsBFawkZoCd8BxQnrYvxstngAAAAASUVORK5CYII=" y="309.7344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="182" x="395" y="374.3438">Single-Page Application</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="96" x="438" y="390.3164">[React/Javascript]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="488" y="407.4863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="178" x="397" y="425.0957">Provides all the (our) Twitter</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="173" x="397.5" y="442.7051">API functionallity to user via</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="82" x="445" y="460.3145">their browser</text><!--MD5=[d40ecb68fd03c4f349b7481a726a4cee]
+entity web_app--><rect fill="#438DD5" height="188.75" style="stroke:#3C7FC0;stroke-width:1.5;" width="199" x="467.5" y="632.6406"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="534.5" y="655.0977">«container»</text><image height="48" width="48" x="543" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAB1UlEQVR4Xu2UMUpDQRCGc7c9gBfwAF7AA3iAWFmJnYWFZTorsRNsLIJEEAISCAiKCoogPH/evjdv3uzOTCqTYn7+Ji8zu9/OzuwkTec75Un5absOIM8B5DmAPAeQ5wDyHECeA2g6Pzh/Opo9cx9freD8rw+0f/Z4t/xsPC3WX4eXyzKdvHfyMLt/lWm9rhfvOcwBOr1Zy1RTGhNoVm8/MpoJATnSArq4fZF5nrBruQ5s1xgbUaQKpNUGW+J25Fcm6gYymkYGMX18//LgOhAqL/NaIRktpbFmlUUyWqcpDlABwnViY5nXCmdN3okhQPMFtdWadhTE7hUgNLzMa4XCbLJHMz60TZ9PyC2BtMsSR9Ggs9DCFGlMBo06twTSGpaXB0YNZMRYFKlNO2pMo849AtLK0xRtgZ8yYqx8F0YYHuiSRgJp5SkHJ3ltlCuqzSO/U+EByOg+/nCR7WHOPafdl6g39wBkbFDOQjLvN0sLKF9O7gFI5vUqnwqyVoCs6r/VyeLugNBiMrWX1n1pgyIJGWcjd0Dau1LtHm7jooWMRubugMqRwWmM2nCjJxCMC9IMlA2XSgSE4pPRwtUn638sX+qtO4A8B5DnAPIcQJ4DyHMAed45oD+t9CZfRjfmZwAAAABJRU5ErkJggg==" y="657.7344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="124" x="505" y="722.3438">Web Application</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="79" x="527.5" y="738.3164">[C#, ASP.NET]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="569" y="755.4863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168" x="483" y="773.0957">Provides all the Twitter API</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="175" x="477.5" y="790.7051">functionalities for the others</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="77" x="528.5" y="808.3145">components</text><!--MD5=[7870a4f86bb2c94d4e322bb63998365c]
+entity api_cluster--><rect fill="#438DD5" height="188.75" style="stroke:#3C7FC0;stroke-width:1.5;" width="189" x="837.5" y="284.6406"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="899.5" y="307.0977">«container»</text><image height="48" width="48" x="908" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAB1UlEQVR4Xu2UMUpDQRCGc7c9gBfwAF7AA3iAWFmJnYWFZTorsRNsLIJEEAISCAiKCoogPH/evjdv3uzOTCqTYn7+Ji8zu9/OzuwkTec75Un5absOIM8B5DmAPAeQ5wDyHECeA2g6Pzh/Opo9cx9freD8rw+0f/Z4t/xsPC3WX4eXyzKdvHfyMLt/lWm9rhfvOcwBOr1Zy1RTGhNoVm8/MpoJATnSArq4fZF5nrBruQ5s1xgbUaQKpNUGW+J25Fcm6gYymkYGMX18//LgOhAqL/NaIRktpbFmlUUyWqcpDlABwnViY5nXCmdN3okhQPMFtdWadhTE7hUgNLzMa4XCbLJHMz60TZ9PyC2BtMsSR9Ggs9DCFGlMBo06twTSGpaXB0YNZMRYFKlNO2pMo849AtLK0xRtgZ8yYqx8F0YYHuiSRgJp5SkHJ3ltlCuqzSO/U+EByOg+/nCR7WHOPafdl6g39wBkbFDOQjLvN0sLKF9O7gFI5vUqnwqyVoCs6r/VyeLugNBiMrWX1n1pgyIJGWcjd0Dau1LtHm7jooWMRubugMqRwWmM2nCjJxCMC9IMlA2XSgSE4pPRwtUn638sX+qtO4A8B5DnAPIcQJ4DyHMAed45oD+t9CZfRjfmZwAAAABJRU5ErkJggg==" y="309.7344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="116" x="874" y="374.3438">API Application</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="22" x="921" y="390.3164">[C#]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="934" y="407.4863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148" x="858" y="425.0957">Implements a clustering</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="847.5" y="442.7051">algorithm in order to make</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="164" x="850" y="460.3145">predictions, trainging data</text><!--MD5=[7535819ed2d2564b6da2611bc0618fdb]
+entity db_cluster--><path d="M837.5,671.1406 C837.5,661.1406 935,661.1406 935,661.1406 C935,661.1406 1032.5,661.1406 1032.5,671.1406 L1032.5,783.2813 C1032.5,793.2813 935,793.2813 935,793.2813 C935,793.2813 837.5,793.2813 837.5,783.2813 L837.5,671.1406 " fill="#438DD5" style="stroke:#3C7FC0;stroke-width:1.5;"/><path d="M837.5,671.1406 C837.5,681.1406 935,681.1406 935,681.1406 C935,681.1406 1032.5,681.1406 1032.5,671.1406 " fill="none" style="stroke:#3C7FC0;stroke-width:1.5;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="902.5" y="697.5977">«container»</text><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="113" x="878.5" y="716.8438">Offline Storage</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="66" x="902" y="732.8164">[CSV/JSON]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="937" y="749.9863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="167" x="851.5" y="767.5957">Holds dataset which will be</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="66" x="902" y="785.2051">processed</text><!--MD5=[565867202d50b270d895ac5b0385671e]
+entity api_us--><rect fill="#438DD5" height="188.75" style="stroke:#3C7FC0;stroke-width:1.5;" width="220" x="23" y="284.6406"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="100.5" y="307.0977">«container»</text><image height="48" width="48" x="109" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAAB1UlEQVR4Xu2UMUpDQRCGc7c9gBfwAF7AA3iAWFmJnYWFZTorsRNsLIJEEAISCAiKCoogPH/evjdv3uzOTCqTYn7+Ji8zu9/OzuwkTec75Un5absOIM8B5DmAPAeQ5wDyHECeA2g6Pzh/Opo9cx9freD8rw+0f/Z4t/xsPC3WX4eXyzKdvHfyMLt/lWm9rhfvOcwBOr1Zy1RTGhNoVm8/MpoJATnSArq4fZF5nrBruQ5s1xgbUaQKpNUGW+J25Fcm6gYymkYGMX18//LgOhAqL/NaIRktpbFmlUUyWqcpDlABwnViY5nXCmdN3okhQPMFtdWadhTE7hUgNLzMa4XCbLJHMz60TZ9PyC2BtMsSR9Ggs9DCFGlMBo06twTSGpaXB0YNZMRYFKlNO2pMo849AtLK0xRtgZ8yYqx8F0YYHuiSRgJp5SkHJ3ltlCuqzSO/U+EByOg+/nCR7WHOPafdl6g39wBkbFDOQjLvN0sLKF9O7gFI5vUqnwqyVoCs6r/VyeLugNBiMrWX1n1pgyIJGWcjd0Dau1LtHm7jooWMRubugMqRwWmM2nCjJxCMC9IMlA2XSgSE4pPRwtUn638sX+qtO4A8B5DnAPIcQJ4DyHMAed45oD+t9CZfRjfmZwAAAABJRU5ErkJggg==" y="309.7344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="127" x="69.5" y="374.3438">API User Service</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="22" x="122" y="390.3164">[C#]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="135" y="407.4863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="192" x="37" y="425.0957">Make calls to the Twitter API in</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="178" x="42" y="442.7051">order to receive some of the</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="78" x="94" y="460.3145">latest tweets</text><!--MD5=[766d8e1d51e7d464823a50d93ab2c7e9]
+entity db_us--><path d="M23,647.1406 C23,637.1406 133,637.1406 133,637.1406 C133,637.1406 243,637.1406 243,647.1406 L243,807.2813 C243,817.2813 133,817.2813 133,817.2813 C133,817.2813 23,817.2813 23,807.2813 L23,647.1406 " fill="#438DD5" style="stroke:#3C7FC0;stroke-width:1.5;"/><path d="M23,647.1406 C23,657.1406 133,657.1406 133,657.1406 C133,657.1406 243,657.1406 243,647.1406 " fill="none" style="stroke:#3C7FC0;stroke-width:1.5;"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="65" x="100.5" y="673.5977">«container»</text><image height="48" width="48" x="109" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAACGklEQVR4Xu2YP0oDQRTGc7c5gBfwAF7AA3gArazEzsLCMp2V2Ak2FiIRhIAEAgFFBUUQ1h/zYJB9u/NespNdiw0fYZl9yf7yzTf/MgmH9/9KE900rEYgSyOQpRHIUjPQ0eXi/esH3c4/uNYF21Mz0OL1e3r3cjB9vpq9VVUFGVg7xw+6sriagaBBcr17+ihYvGbLz/Ob1f7FXH+klJqBgMAV3lML9sBxcr2ESci2hNUMhOTZuh3tnT2JZ8nFgmoFQphEjHS7iFsUAF02WzkgHkm6dXsSKABRU5ApBxSiSWZW6L5a4LrIACJJTEW6vSZqSvlkAPEMwut5En3XNgjWkgEUYo94RhNdVmTc2UBikici9C+VTAr6ll82EGJ2dv50ktSx41xA/HQ6TrdrMSQxyRyYGbmAsMe/5ndMtwuIjvAno6NJLiDnyE/qYpINJKNMt2fUxaT1gGRbomu0NjbJBgqxy2QeIt1cM+h0TU1kzllZkwuIpUr2IaS7ii9PpPz0f+UCIg0wyeLAA8BiqtRlWhTLYSGzr6rJBRRiJsQbsCRJHpNEsq/iGzzrjxdI9mLJfzxzzt1J4pZplRdIi6/2z5YiHJrFc4u+lbQ50LqCBl8l6ZmFqA8ggaji4UnOn5n89QfknLj7AApx2wmTmejQG1CIf2DAZI7N/oBCXE/MLWWvQKL80WoAoBCn2bY5bBigjEYgSyOQpRHI0i9RwF9GQ0QZTAAAAABJRU5ErkJggg==" y="676.2344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="72" x="97" y="740.8438">Database</text><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="45" x="110.5" y="756.8164">[MySQL]</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="0" x="135" y="773.9863"/><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="192" x="37" y="791.5957">Holds user information, search</text><text fill="#FFFFFF" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="42" x="112" y="809.2051">history</text><!--MD5=[8fc3522a43f8c7199df5e09e5bb0188e]
+entity user--><rect fill="#08427B" height="103.2188" style="stroke:#073B6F;stroke-width:1.5;" width="72" x="450" y="29.6406"/><text fill="#FFFFFF" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="52" x="460" y="52.0977">«person»</text><image height="48" width="48" x="462" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAIAAADYYG7QAAACbklEQVR4Xu1Wq04FMRS8cj+BT+AXsDgMHwAfQILGXUWQgMQQggRDgsBgSLiWgEIREhRIEAjsMum5dLtzetreXgKE7GTUbh/TOY921CyP/xRH+tPvchCU4yAox0FQjt8gaHF9b2XreGnjYGF1R/+dlfWCsP3uyeTt/aMNcPfwDHF6cDkrBcEPkhLi6OJGTylkjSDEKKFGUK2pRhDiwvvHUBe7iKDN/fOnl1esCBuQJfQX2/DOBqBbz726fWzdymfX93Ba786CYHV6XT0ggbDu1rZP6S9kaU09QUhVmiMIfZIjFgILyiwo438O2sWeIOv0iKAfU5hAAp9G2h4P6l49QYgrD3eAt9kxUfiIIC/53xcoaj1B48NLHu4QGptYmhAeI1EKoQAWZEUahmfHaFCFSuUSdLviKtNH0ZVvGRkC9lByIDSkCfVBKzdaUOM8wJbQDim+TIjZTLImIuJYGbTaZkRQIS2fkHC6u5STBcEeLIfzeSYeFfiFE8MtiID/iXMLaeWo7k4QVreaHmJvhaCQiD4v6oBUw5HCkZ2gaBUIMC199CzTORdqmgqyEqJ19vioYSZclLeHXL1hTBECNAhvMyYiiCW9sQ260VSQdSH46tVFWw7fOBLH9hGYCrI2k9SBGv4xIxAy2chKU997U4J848q+D0sgiWI9KFhQNGRiY8LnmeCvtsRenaBoxiXMq4PYoFtA+Lzpyh5mwgxPcbj8Ki2BXKXISNoo7L3cqYnzp3OI6G1KzAiycrAO/1EQyKvOAf200swLsl7+FYhe78S8oMa1IlQmGkk1EawSNU2hoJ/kICjHQVCOg6AcB0E5fgLPSUakWeua4wAAAABJRU5ErkJggg==" y="54.7344"/><text fill="#FFFFFF" font-family="sans-serif" font-size="16" font-weight="bold" lengthAdjust="spacing" textLength="36" x="468" y="119.3438">User</text><!--MD5=[39b11ef542f7a14a94220403294364cd]
+link user to page--><path d="M486,132.6906 C486,172.0306 486,227.9006 486,276.4006 " fill="none" id="user-to-page" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="486,284.4306,489,276.4306,483,276.4306,486,284.4306" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="29" x="488.5" y="176.0977">Uses</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="32" x="487" y="191.1914">[https]</text><!--MD5=[b4acf1ec3efa6aa11b38e0cd3adfa00e]
+link page to api_us--><path d="M382.91,379.1406 C341.71,379.1406 294.02,379.1406 251.41,379.1406 " fill="none" id="page-to-api_us" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="243.24,379.1406,251.24,382.1406,251.24,376.1406,243.24,379.1406" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="103" x="261.5" y="357.5977">Send user input to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="37" x="294.5" y="372.6914">[HTTP]</text><!--MD5=[73760199ed8f07890a759c559f7a0678]
+link api_us to web_app--><path d="M243.13,468.1506 C277.08,495.2606 314.57,525.1906 349,552.6406 C385.41,581.6706 425.26,613.3906 460.81,641.6906 " fill="none" id="api_us-to-web_app" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="467.4,646.9306,463.0026,639.6051,459.2701,644.3029,467.4,646.9306" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="104" x="350" y="526.5977">Sends requests to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="81" x="361.5" y="541.6914">[HTTPS-JSON]</text><!--MD5=[41689b334b052e6ccfe361065fd9bbf0]
+link web_app to page--><path d="M501.81,632.2806 C487.91,607.4706 475.25,579.9606 468,552.6406 C462.03,530.1206 461.31,505.4506 463.22,482.0006 " fill="none" id="web_app-to-page" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="463.99,473.7606,460.2606,481.4477,466.2348,482.0045,463.99,473.7606" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="147" x="469" y="519.0977">Send relevant output after</text><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="121" x="483.5" y="534.1914">clustering process to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="80" x="504" y="549.2852">[HTTPS/JSON]</text><!--MD5=[ff669f335c2f08aa91d7d5d9b5308273]
+reverse link api_cluster to web_app--><path d="M844.48,480.1806 C822.11,504.4906 797.67,529.9906 774,552.6406 C740.29,584.9006 701.52,618.2906 666.7,647.0606 " fill="none" id="api_cluster-backto-web_app" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="850.12,474.0306,842.5006,477.8965,846.9213,481.9533,850.12,474.0306" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="74" x="820" y="526.5977">Send input to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="38" x="838" y="541.6914">[JSON]</text><!--MD5=[1d03a14e9b0d24ce3ee5335c64cf7039]
+link api_cluster to web_app--><path d="M837.27,403.6706 C778.4,422.5806 704.88,454.6106 656,505.6406 C638.38,524.0306 617.07,575.9306 599.72,624.7506 " fill="none" id="api_cluster-to-web_app" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="596.97,632.5606,602.4576,626.0119,596.7985,624.0183,596.97,632.5606" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="108" x="657" y="526.5977">Return statistics to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="38" x="692" y="541.6914">[JSON]</text><!--MD5=[2be429466815f80854f9d81b650a47e0]
+link api_us to db_us--><path d="M117.24,473.8506 C115.91,484.5506 114.78,495.3106 114,505.6406 C110.96,546.0606 113.65,590.6106 117.87,629.0306 " fill="none" id="api_us-to-db_us" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="118.79,637.1306,120.8719,628.8441,114.9099,629.5185,118.79,637.1306" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="138" x="115" y="526.5977">Reads from and Write to</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="42" x="163" y="541.6914">[CRUD]</text><!--MD5=[825a0e725e3546c6baaa5c28a94b4e75]
+link api_cluster to db_cluster--><path d="M932.81,473.7706 C933.3,530.0006 933.91,600.5206 934.36,652.7106 " fill="none" id="api_cluster-to-db_cluster" style="stroke:#666666;stroke-width:1.0;"/><polygon fill="#666666" points="934.43,660.9206,937.3727,652.8994,931.3728,652.9423,934.43,660.9206" style="stroke:#666666;stroke-width:1.0;"/><text fill="#666666" font-family="sans-serif" font-size="12" font-weight="bold" lengthAdjust="spacing" textLength="66" x="952" y="526.5977">Reads from</text><text fill="#666666" font-family="sans-serif" font-size="12" font-style="italic" lengthAdjust="spacing" textLength="102" x="934" y="541.6914">[Cluster technique]</text><!--MD5=[64f9361770795377dac7f99477128331]
+@startuml diagramasetcontainer
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+!define DEVICONS https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/devicons
+!define FONTAWESOME https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/master/font-awesome-5
+!include FONTAWESOME/users.puml
+!include DEVICONS/dotnet.puml
+!include DEVICONS/react.puml
+!include DEVICONS/mysql.puml
+
+title Container diagram for Visual Twitter Web Application
+
+Person(user, "User", "", $sprite="users")
+System_Boundary(ui, "UI Component") {
+    Container(page, "Single-Page Application", "React/Javascript", "Provides all the (our) Twitter API functionallity to user via their browser", $sprite="react")
+}
+
+System_Boundary(twiter_api, "Twitter API Component") {
+    Container(web_app, "Web Application", "C#, ASP.NET", "Provides all the Twitter API functionalities for the others components", $sprite="dotnet")
+}
+
+System_Boundary(cluster, "Clustering Component") {
+    Container(api_cluster, "API Application", "C#", "Implements a clustering algorithm in order to make predictions, trainging data", $sprite="dotnet")
+    ContainerDb(db_cluster, "Offline Storage", "CSV/JSON", "Holds dataset which will be processed")
+}
+
+System_Boundary(user_service, "User service Component", "Services used to satisfy user needs") {
+    Container(api_us, "API User Service", "C#", "Make calls to the Twitter API in order to receive some of the latest tweets", $sprite="dotnet")
+    ContainerDb(db_us, "Database", "MySQL", "Holds user information, search history", $sprite="mysql")
+}
+
+Rel(user, page, "Uses", "https")
+Rel_R(page, api_us, "Send user input to", "HTTP")
+Rel(api_us, web_app, "Sends requests to", "HTTPS-JSON")
+Rel(web_app, page, "Send relevant output after clustering process to", "HTTPS/JSON")
+Rel_L(web_app, api_cluster, "Send input to", "JSON")
+Rel(api_cluster, web_app, "Return statistics to", "JSON")
+
+Rel(api_us, db_us, "Reads from and Write to", "CRUD")
+Rel(api_cluster, db_cluster, "Reads from", "Cluster technique")
+@enduml
+
+@startuml diagramasetcontainer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+skinparam defaultTextAlignment center
+
+skinparam wrapWidth 200
+skinparam maxMessageSize 150
+
+skinparam LegendBorderColor transparent
+skinparam LegendBackgroundColor transparent
+skinparam LegendFontColor #FFFFFF
+
+skinparam shadowing<<legendArea>> false
+skinparam rectangle<<legendArea>> {
+    backgroundcolor #00000000
+    bordercolor #00000000
+}
+
+skinparam rectangle {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam database {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam queue {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam arrow {
+    Color #666666
+    FontColor #666666
+    FontSize 12
+}
+
+skinparam actor {
+    StereotypeFontSize 12
+    shadowing false
+    style awesome
+}
+
+skinparam person {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam package {
+    StereotypeFontSize 6
+    StereotypeFontColor transparent
+    FontStyle plain
+    BackgroundColor transparent
+}
+
+skinparam rectangle<<boundary>> {
+    Shadowing false
+    StereotypeFontSize 6
+    StereotypeFontColor transparent
+    FontColor #444444
+    BorderColor #444444
+    BackgroundColor transparent
+    BorderStyle dashed
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+skinparam rectangle<<person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #08427B
+    BorderColor #073B6F
+}
+skinparam database<<person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #08427B
+    BorderColor #073B6F
+}
+skinparam queue<<person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #08427B
+    BorderColor #073B6F
+}
+skinparam actor<<person>> {
+    StereotypeFontColor #08427B
+    FontColor #08427B
+    BackgroundColor #08427B
+    BorderColor #073B6F
+}
+skinparam person<<person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #08427B
+    BorderColor #073B6F
+}
+
+
+skinparam rectangle<<external_person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #686868
+    BorderColor #8A8A8A
+}
+skinparam database<<external_person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #686868
+    BorderColor #8A8A8A
+}
+skinparam queue<<external_person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #686868
+    BorderColor #8A8A8A
+}
+skinparam actor<<external_person>> {
+    StereotypeFontColor #686868
+    FontColor #686868
+    BackgroundColor #686868
+    BorderColor #8A8A8A
+}
+skinparam person<<external_person>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #686868
+    BorderColor #8A8A8A
+}
+
+
+skinparam rectangle<<system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #1168BD
+    BorderColor #3C7FC0
+}
+skinparam database<<system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #1168BD
+    BorderColor #3C7FC0
+}
+skinparam queue<<system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #1168BD
+    BorderColor #3C7FC0
+}
+skinparam actor<<system>> {
+    StereotypeFontColor #1168BD
+    FontColor #1168BD
+    BackgroundColor #1168BD
+    BorderColor #3C7FC0
+}
+skinparam person<<system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #1168BD
+    BorderColor #3C7FC0
+}
+
+
+skinparam rectangle<<external_system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #999999
+    BorderColor #8A8A8A
+}
+skinparam database<<external_system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #999999
+    BorderColor #8A8A8A
+}
+skinparam queue<<external_system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #999999
+    BorderColor #8A8A8A
+}
+skinparam actor<<external_system>> {
+    StereotypeFontColor #999999
+    FontColor #999999
+    BackgroundColor #999999
+    BorderColor #8A8A8A
+}
+skinparam person<<external_system>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #999999
+    BorderColor #8A8A8A
+}
+
+
+
+
+
+sprite $person [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+0000000000000000000049BCCA7200000000000000000000
+0000000000000000006EFFFFFFFFB3000000000000000000
+00000000000000001CFFFFFFFFFFFF700000000000000000
+0000000000000001EFFFFFFFFFFFFFF80000000000000000
+000000000000000CFFFFFFFFFFFFFFFF6000000000000000
+000000000000007FFFFFFFFFFFFFFFFFF100000000000000
+00000000000001FFFFFFFFFFFFFFFFFFF900000000000000
+00000000000006FFFFFFFFFFFFFFFFFFFF00000000000000
+0000000000000BFFFFFFFFFFFFFFFFFFFF40000000000000
+0000000000000EFFFFFFFFFFFFFFFFFFFF70000000000000
+0000000000000FFFFFFFFFFFFFFFFFFFFF80000000000000
+0000000000000FFFFFFFFFFFFFFFFFFFFF80000000000000
+0000000000000DFFFFFFFFFFFFFFFFFFFF60000000000000
+0000000000000AFFFFFFFFFFFFFFFFFFFF40000000000000
+00000000000006FFFFFFFFFFFFFFFFFFFE00000000000000
+00000000000000EFFFFFFFFFFFFFFFFFF800000000000000
+000000000000007FFFFFFFFFFFFFFFFFF100000000000000
+000000000000000BFFFFFFFFFFFFFFFF5000000000000000
+0000000000000001DFFFFFFFFFFFFFF70000000000000000
+00000000000000000BFFFFFFFFFFFF500000000000000000
+0000000000000000005DFFFFFFFFA1000000000000000000
+0000000000000000000037ABB96100000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000025788300000000005886410000000000000
+000000000007DFFFFFFD9643347BFFFFFFFB400000000000
+0000000004EFFFFFFFFFFFFFFFFFFFFFFFFFFB1000000000
+000000007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFD200000000
+00000006FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE10000000
+0000003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB0000000
+000000BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5000000
+000003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD000000
+000009FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF200000
+00000DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF600000
+00000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF800000
+00001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA00000
+00001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB00000
+00001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB00000
+00001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB00000
+00001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA00000
+00000EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF700000
+000006FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE100000
+0000008FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3000000
+000000014555555555555555555555555555555300000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+
+sprite $person2 [48x48/16] {
+0000000000000000000049BCCA7200000000000000000000
+0000000000000000006EFFFFFFFFB3000000000000000000
+00000000000000001CFFFFFFFFFFFF700000000000000000
+0000000000000001EFFFFFFFFFFFFFF80000000000000000
+000000000000000CFFFFFFFFFFFFFFFF6000000000000000
+000000000000007FFFFFFFFFFFFFFFFFF100000000000000
+00000000000001FFFFFFFFFFFFFFFFFFF900000000000000
+00000000000006FFFFFFFFFFFFFFFFFFFF00000000000000
+0000000000000BFFFFFFFFFFFFFFFFFFFF40000000000000
+0000000000000EFFFFFFFFFFFFFFFFFFFF70000000000000
+0000000000000FFFFFFFFFFFFFFFFFFFFF80000000000000
+0000000000000FFFFFFFFFFFFFFFFFFFFF80000000000000
+0000000000000DFFFFFFFFFFFFFFFFFFFF60000000000000
+0000000000000AFFFFFFFFFFFFFFFFFFFF40000000000000
+00000000000006FFFFFFFFFFFFFFFFFFFE00000000000000
+00000000000000EFFFFFFFFFFFFFFFFFF800000000000000
+000000000000007FFFFFFFFFFFFFFFFFF100000000000000
+000000000000000BFFFFFFFFFFFFFFFF5000000000000000
+0000000000000001DFFFFFFFFFFFFFF70000000000000000
+00000000000000000BFFFFFFFFFFFF500000000000000000
+0000000000000000005DFFFFFFFFA1000000000000000000
+0000000000000000000037ABB96100000000000000000000
+000000000002578888300000000005888864100000000000
+0000000007DFFFFFFFFD9643347BFFFFFFFFFB4000000000
+00000004EFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB10000000
+0000007FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD2000000
+000006FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFE100000
+00003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB00000
+0000BFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF50000
+0003FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD0000
+0009FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF2000
+000DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6000
+000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8000
+001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB000
+001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB000
+001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB000
+001FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA000
+000FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF8000
+000DFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF6000
+0009FFFFFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFFFFF2000
+0003FFFFFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFFFFD0000
+0000BFFFFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFFFF50000
+00003FFFFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFFFB00000
+000006FFFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFFE100000
+0000007FFFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFFD2000000
+00000004EFFF8FFFFFFFFFFFFFFFFFFFFFF8FFFB10000000
+0000000007DF8FFFFFFFFFFFFFFFFFFFFFF8FB4000000000
+000000000002578888888888888888888864100000000000
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+skinparam rectangle<<container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #438DD5
+    BorderColor #3C7FC0
+}
+skinparam database<<container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #438DD5
+    BorderColor #3C7FC0
+}
+skinparam queue<<container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #438DD5
+    BorderColor #3C7FC0
+}
+skinparam actor<<container>> {
+    StereotypeFontColor #438DD5
+    FontColor #438DD5
+    BackgroundColor #438DD5
+    BorderColor #3C7FC0
+}
+skinparam person<<container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #438DD5
+    BorderColor #3C7FC0
+}
+
+
+skinparam rectangle<<external_container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #B3B3B3
+    BorderColor #A6A6A6
+}
+skinparam database<<external_container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #B3B3B3
+    BorderColor #A6A6A6
+}
+skinparam queue<<external_container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #B3B3B3
+    BorderColor #A6A6A6
+}
+skinparam actor<<external_container>> {
+    StereotypeFontColor #B3B3B3
+    FontColor #B3B3B3
+    BackgroundColor #B3B3B3
+    BorderColor #A6A6A6
+}
+skinparam person<<external_container>> {
+    StereotypeFontColor #FFFFFF
+    FontColor #FFFFFF
+    BackgroundColor #B3B3B3
+    BorderColor #A6A6A6
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+sprite $users [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000024310000000000000000000000
+000000000000000000018EFFFFC400000000000000000000
+0000000000000000003EFFFFFFFF90000000000000000000
+000000000000000002EFFFFFFFFFF9000000000000000000
+00000000000000000CFFFFFFFFFFFF400000000000000000
+0000006DFE8000004FFFFFFFFFFFFFC000004BFEA2000000
+000009FFFFFC00009FFFFFFFFFFFFFF10005FFFFFE200000
+00003FFFFFFF8000BFFFFFFFFFFFFFF3001FFFFFFFC00000
+00009FFFFFFFD000CFFFFFFFFFFFFFF4005FFFFFFFF10000
+0000AFFFFFFFE000AFFFFFFFFFFFFFF2006FFFFFFFF20000
+00007FFFFFFFC0006FFFFFFFFFFFFFE0004FFFFFFFF00000
+00001FFFFFFF50001FFFFFFFFFFFFF80000DFFFFFF900000
+000004FFFFF8000007FFFFFFFFFFFE100002DFFFFB000000
+000000179830000000AFFFFFFFFFF3000000069940000000
+00000000000000000007FFFFFFFC20000000000000000000
+0000012333310000000016ACB94000000000233332000000
+0001BFFFFFFFD3000000000000000000008FFFFFFFE60000
+000DFFFFFFFFE400000000000000000000AFFFFFFFFF6000
+007FFFFFFFFD1006BEFE8310025BFFD92006FFFFFFFFF000
+00CFFFFFFFE102DFFFFFFFFFFFFFFFFFF8007FFFFFFFF400
+00DFFFFFFF302FFFFFFFFFFFFFFFFFFFFFA00BFFFFFFF500
+00DFFFFFFB00EFFFFFFFFFFFFFFFFFFFFFF603FFFFFFF500
+00CFFFFFF407FFFFFFFFFFFFFFFFFFFFFFFE00CFFFFFF400
+006FFFFFF00DFFFFFFFFFFFFFFFFFFFFFFFF508FFFFFD000
+00037777601FFFFFFFFFFFFFFFFFFFFFFFFF902777761000
+00000000002FFFFFFFFFFFFFFFFFFFFFFFFFB00000000000
+00000000003FFFFFFFFFFFFFFFFFFFFFFFFFB00000000000
+00000000003FFFFFFFFFFFFFFFFFFFFFFFFFB00000000000
+00000000000FFFFFFFFFFFFFFFFFFFFFFFFF800000000000
+000000000009FFFFFFFFFFFFFFFFFFFFFFFF200000000000
+0000000000007DEEEEEEEEEEEEEEEEEEEEB2000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+
+
+skinparam folderBackgroundColor<<FA5 USERS>> White
+sprite $dotnet [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000003555556600
+000000000002BFFFFFFFFFFFC400000000019FFFFFFFFA00
+00000000007FFFFFFFFFFFFFFF400000001DFFFFFFFFF100
+0000000008FFFFFFFFFFFFFFFFD0000000BFFFFFFFFF8000
+000000007FFFFFFFDCFFFFFFFFF6000003FFFFFFFFFE0000
+00000004FFFFFFFE27FFFFFFFFFD000009FFFFFFFFF60000
+0000001EFFFFFFF303FFFFFFFFFF20000EFFFFFFFFC00000
+000000AFFFFFFF7000EFFFFFFFFF60003FFFFFFFFF300000
+000004FFFFFFFC0000AFFFFFFFFFB0008FFFFFFFFA000000
+00000CFFFFFFF700006FFFFFFFFFF000DFFFFFFFE1000000
+00004FFFFFFFF200002FFFFFFFFFF302FFFFFFFF50000000
+0000CFFFFFFFD000000EFFFFFFFFF707FFFFFFFB00000000
+0003FFFFFFFF80000009FFFFFFFFFC0DFFFFFFF200000000
+0009FFFFFFFF30000004FFFFFFFFFF4FFFFFFF6000000000
+000FFFFFFFFC00000000DFFFFFFFFFDFFFFFFA0000000000
+005FFFFFFFF5000000004FFFFFFFFFFFFFFFC00000000000
+00AFFFFFFF800000000009FFFFFFFFFFFFFB000000000000
+00EFFFFFC50000000000006CDDDDDDDDDB50000000000000
+004444310000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+
+
+skinparam folderBackgroundColor<<DEV DOTNET>> White
+sprite $react [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000686300000000003686000000000000000
+00000000000002EFFFFC30000003CFFFFD10000000000000
+0000000000000CF7249FF800009FF9427FB0000000000000
+0000000000002FB00001CFB01CFC20000AF1000000000000
+0000000000005F60000008FDDF90000005F4000000000000
+0000000000006F400000008FF800000004F6000000000000
+0000000000006F40000000CFFC00000003F6000000000000
+0000000000005F5000000AF99FB0000005F5000000000000
+0000000000003F7000007FB00BF7000007F3000000000000
+0000000000000FA00246FFA99AFF73100AF1000000000000
+0000000000000EFCFFFFFFFFFFFFFFFECEE0000000000000
+00000000004BFFFFC9DF82211228FD9BEFFE920000000000
+000000004CFFC9F802FD00000000DF307F9CFFB300000000
+00000008FF9200ED0BF3001441003FC0DE0029FF70000000
+0000009FC200009F8FA004EFFE400AF8F900002CF8000000
+000003FC0000002FFF201EFFFFE102FFF2000001CF200000
+000008F40000000BF9004FFFFFF4009FB00000004F700000
+000008F40000000CF9004FFFFFF4009FC00000004F800000
+000003FC0000003FFF200EFFFFE002FFF2000000CF300000
+0000008FD300009F8FA004EFFE400AF7F900002CF9000000
+00000007FFA300EE0BF4000440004FB0DE002AFF80000000
+000000003BFFDAF802FD00000000DF207FACFFC400000000
+000000000029EFFFC9DF83222238FDACFFFFB40000000000
+0000000000000EEBEFFFFFFFFFFFFFFFCEE0000000000000
+0000000000001FA00036FF9889FF63100AF0000000000000
+0000000000004F7000006FB00BF6000007F3000000000000
+0000000000005F5000000AF99FA0000005F5000000000000
+0000000000006F40000000CFFC00000004F6000000000000
+0000000000006F400000008FF800000004F6000000000000
+0000000000004F60000009FDDF90000006F4000000000000
+0000000000001FB00002CFB01BFC20000BF2000000000000
+0000000000000BF724AFF800008FF9427FC0000000000000
+00000000000001DFFFFB30000003CFFFFE20000000000000
+000000000000000465200000000003686000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+
+
+skinparam folderBackgroundColor<<DEV REACT>> White
+sprite $mysql [48x48/16] {
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+00000006EEB6000000000000000000000000000000000000
+0000000D95AFE61000000000000000000000000000000000
+000000099002AFFC84000000000000000000000000000000
+00000002E2000147CFC40000000000000000000000000000
+000000007C00000003AF9000000000000000000000000000
+000000000E5000000005EC10000000000000000000000000
+0000000005D0000000001CD1000000000000000000000000
+0000000000E40000000000AE200000000000000000000000
+00000000007B00000000000BD10000000000000000000000
+00000000001F100000000000CC0000000000000000000000
+00000000000A9000000000002F9000000000000000000000
+000000000001F2000000000007F300000000000000000000
+00000000000089000000000000DC00000000000000000000
+0000000000007A0000000000004F40000000000000000000
+000000000000960000000000000CC0000000000000000000
+000000000000D300000000000004F4000000000000000000
+000000000000F100000000000000CC000000000000000000
+000000000001F0000000000000004F400000000000000000
+000000000001F002E000000000000CC00000000000000000
+000000000000F209F7000000000003F70000000000000000
+000000000000B50DFF1000000000009F7000000000000000
+0000000000004B2F7D80000000000007EE50000000000000
+0000000000000CFF22E100000000000005DC200000000000
+00000000000001C7004A0000000000000007E50000000000
+0000000000000000000530000000000000002C8000000000
+00000000000000000000000000000000000249F600000000
+0000000000000000000000000000000009FFC95100000000
+0000000000000000000000000000000009F4000000000000
+0000000000000000000000000000000000AF500000000000
+000000000000000000000000000000000006FA0000000000
+0000000000000000000000000000000000003DC000000000
+000000000000000000000000000000000000007B00000000
+000000000000000000000000000000000000000130000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+000000000000000000000000000000000000000000000000
+}
+
+
+skinparam folderBackgroundColor<<DEV MYSQL>> White
+
+title Container diagram for Visual Twitter Web Application
+
+rectangle "<$users>\n==User" <<person>> as user 
+rectangle "==UI Component\n<size:12>[System]</size>" <<boundary>> as ui  {
+    rectangle "<$react>\n==Single-Page Application\n//<size:12>[React/Javascript]</size>//\n\n Provides all the (our) Twitter API functionallity to user via their browser" <<container>> as page 
+}
+
+rectangle "==Twitter API Component\n<size:12>[System]</size>" <<boundary>> as twiter_api  {
+    rectangle "<$dotnet>\n==Web Application\n//<size:12>[C#, ASP.NET]</size>//\n\n Provides all the Twitter API functionalities for the others components" <<container>> as web_app 
+}
+
+rectangle "==Clustering Component\n<size:12>[System]</size>" <<boundary>> as cluster  {
+    rectangle "<$dotnet>\n==API Application\n//<size:12>[C#]</size>//\n\n Implements a clustering algorithm in order to make predictions, trainging data" <<container>> as api_cluster 
+    database "==Offline Storage\n//<size:12>[CSV/JSON]</size>//\n\n Holds dataset which will be processed" <<container>> as db_cluster 
+}
+
+rectangle "==User service Component\n<size:12>[System]</size>" <<Services used to satisfy user needs>><<boundary>> as user_service  {
+    rectangle "<$dotnet>\n==API User Service\n//<size:12>[C#]</size>//\n\n Make calls to the Twitter API in order to receive some of the latest tweets" <<container>> as api_us 
+    database "<$mysql>\n==Database\n//<size:12>[MySQL]</size>//\n\n Holds user information, search history" <<container>> as db_us 
+}
+
+user - ->> page : **Uses**\n//<size:12>[https]</size>//
+page -RIGHT->> api_us : **Send user input to**\n//<size:12>[HTTP]</size>//
+api_us - ->> web_app : **Sends requests to**\n//<size:12>[HTTPS-JSON]</size>//
+web_app - ->> page : **Send relevant output after clustering process to**\n//<size:12>[HTTPS/JSON]</size>//
+web_app -LEFT->> api_cluster : **Send input to**\n//<size:12>[JSON]</size>//
+api_cluster - ->> web_app : **Return statistics to**\n//<size:12>[JSON]</size>//
+
+api_us - ->> db_us : **Reads from and Write to**\n//<size:12>[CRUD]</size>//
+api_cluster - ->> db_cluster : **Reads from**\n//<size:12>[Cluster technique]</size>//
+@enduml
+
+PlantUML version 1.2021.7(Sun May 23 15:40:07 EEST 2021)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Default Encoding: Cp1252
+Language: en
+Country: US
+--></g></svg>

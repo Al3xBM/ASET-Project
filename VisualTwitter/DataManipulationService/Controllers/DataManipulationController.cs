@@ -11,10 +11,10 @@ namespace DataManipulationService.Controllers
     [Route("DataManipulation")]
     public class DataManipulationController : ControllerBase
     {
-        private readonly IDataManipulationService _dataManipulationService;
-        public DataManipulationController(IDataManipulationService dataManipulationService)
+        private readonly ITweetsManipulationService _tweetsManipulationService;
+        public DataManipulationController(ITweetsManipulationService tweetsManipulationService)
         {
-            _dataManipulationService = dataManipulationService;
+            _tweetsManipulationService = tweetsManipulationService;
 
         }
 

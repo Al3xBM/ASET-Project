@@ -5458,26 +5458,26 @@
     ]
   },
   "packageFolders": {
-    "A:\\Users\\theon\\.nuget\\packages\\": {}
+    "C:\\Users\\aliba\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+      "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
       "projectName": "UserService",
-      "projectPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
-      "packagesPath": "A:\\Users\\theon\\.nuget\\packages\\",
-      "outputPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
+      "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+      "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
+      "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "A:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "A:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "A:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -5531,7 +5531,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "A:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
       }
     }
   }

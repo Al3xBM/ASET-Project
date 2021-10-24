@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserService", "UserService\UserService.csproj", "{9E670745-72BD-4CD3-83AB-4B01068D940B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{9E670745-72BD-4CD3-83AB-4B01068D940B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManipulationService", "DataManipulationService\DataManipulationService.csproj", "{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9E670745-72BD-4CD3-83AB-4B01068D940B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E670745-72BD-4CD3-83AB-4B01068D940B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E670745-72BD-4CD3-83AB-4B01068D940B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataManipulationService.Interfaces
 {
-    public interface IDataManipulationService
+    public interface ITweetsManipulationService
     {
         public List<Tweet> FilterDataForSearch(List<Tweet> tweets);
         public List<Tweet> FilterDataForTrending(List<Tweet> tweets);

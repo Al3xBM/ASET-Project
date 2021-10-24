@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserService", "UserService\UserService.csproj", "{9E670745-72BD-4CD3-83AB-4B01068D940B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataManipulationService", "DataManipulationService\DataManipulationService.csproj", "{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManipulationService", "DataManipulationService\DataManipulationService.csproj", "{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClusteringComponent", "ClusteringComponent\ClusteringComponent.csproj", "{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDC99533-F4A4-42D2-9E59-7FE10C804A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

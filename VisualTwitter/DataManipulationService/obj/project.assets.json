@@ -198,11 +198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ASET\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
+      "projectUniqueName": "E:\\aset repo\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
       "projectName": "DataManipulationService",
-      "projectPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
+      "projectPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
       "packagesPath": "A:\\Users\\theon\\.nuget\\packages\\",
-      "outputPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\DataManipulationService\\obj\\",
+      "outputPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\DataManipulationService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "A:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",

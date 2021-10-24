@@ -5463,11 +5463,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+      "projectUniqueName": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
       "projectName": "UserService",
-      "projectPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+      "projectPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
       "packagesPath": "A:\\Users\\theon\\.nuget\\packages\\",
-      "outputPath": "E:\\ASET\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
+      "outputPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "A:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",

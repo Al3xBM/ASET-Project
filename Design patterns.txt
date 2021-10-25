@@ -6,8 +6,15 @@ Balan Marius-Alexandru
 Aparaschivei Sebastian-Nicolae
 	- Singleton - twitter api connection
 	- Chain of responsability - authentication verification
+	- Dependency injection
 Craciun Ioan-Paul
 	- Builder - for making and managing templates
-	- 
+	- Dependency injection
+
+
+Larger-scale design patterns :
+Microservices architecture
+REST architecture for services that will use databases
+MVC architecture
 
 * Don't know if dependency injection and repository are considered as patterns

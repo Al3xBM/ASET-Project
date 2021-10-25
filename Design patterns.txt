@@ -1,0 +1,13 @@
+Balan Marius-Alexandru
+	- Singleton - database connection
+	- Memento - search history
+	- Dependency injection - in controllers
+	- Repository
+Aparaschivei Sebastian-Nicolae
+	- Singleton - twitter api connection
+	- Chain of responsability - authentication verification
+Craciun Ioan-Paul
+	- Builder - for making and managing templates
+	- 
+
+* Don't know if dependency injection and repository are considered as patterns

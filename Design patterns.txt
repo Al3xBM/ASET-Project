@@ -16,5 +16,7 @@ Larger-scale design patterns :
 Microservices architecture
 REST architecture for services that will use databases
 MVC architecture
+Bridge design pattern- separation of infrastructure and implementation
+Domain Driven Design - architecture that we will aim for after further development of the project
+Some of the functionalities will be developed using Test Driven Design
 
-* Don't know if dependency injection and repository are considered as patterns

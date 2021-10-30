@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataManipulationService", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClusteringComponent", "ClusteringComponent\ClusteringComponent.csproj", "{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserServiceTests", "UserServiceTests\UserServiceTests.csproj", "{4CA96F3B-F4BD-4C15-A6BB-6D3044A86146}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4509355A-1BCD-4F5B-BE8D-4D2392CBC849}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CA96F3B-F4BD-4C15-A6BB-6D3044A86146}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CA96F3B-F4BD-4C15-A6BB-6D3044A86146}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CA96F3B-F4BD-4C15-A6BB-6D3044A86146}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CA96F3B-F4BD-4C15-A6BB-6D3044A86146}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

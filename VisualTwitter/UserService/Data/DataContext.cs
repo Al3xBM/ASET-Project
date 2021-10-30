@@ -1,14 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UserService.Models;
 
 namespace UserService.Data
 {
     public class DataContext : DbContext
     {
+        public DataContext()
+        {
+
+        }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
@@ -18,7 +19,8 @@ namespace UserService.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.Entity<User>().ToTable("User");
+            modelBuilder.Entity<SearchResult>().ToTable("SearchResults");
         }
     }
 }

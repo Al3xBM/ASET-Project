@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UserService.Data;
+using UserService.Helpers;
 using UserService.Models;
 
 namespace UserService.Repositories
@@ -18,12 +19,38 @@ namespace UserService.Repositories
 
         public User Authenticate(string email, string password)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+                return null;
+
+            var user = _dataContext.Users.SingleOrDefault(x => x.Email == email);
+
+            if (user == null)
+                return null;
+
+            if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+                return null;
+
+            return user;
         }
 
         public User Create(User user, string password)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(password))
+                throw new UserException("Password is required");
+
+            if (_dataContext.Users.Any(x => x.Email == user.Email))
+                throw new UserException("email \"" + user.Email + "\" is already taken");
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _dataContext.Users.Add(user);
+            _dataContext.SaveChanges();
+
+            return user;
         }
 
         public void Delete(int id)

@@ -11,25 +11,22 @@ namespace DataManipulationService.Controllers
     [Route("DataManipulation")]
     public class DataManipulationController : ControllerBase
     {
-        private readonly ITweetsManipulationService _tweetsManipulationService;
-        private readonly ITwitterConnection _twitterConnection;
-        public DataManipulationController(ITweetsManipulationService tweetsManipulationService, ITwitterConnection twitterConnection)
+        //private readonly ITweetsManipulationService _tweetsManipulationService;
+        private readonly ITwitterApiService _twitterApiService;
+        public DataManipulationController(ITwitterApiService twitterApiService)
         {
-            _tweetsManipulationService = tweetsManipulationService;
-            _twitterConnection = twitterConnection;
+            //_tweetsManipulationService = tweetsManipulationService;
+            _twitterApiService = twitterApiService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetTrendingAsync()
+        [HttpGet("trending/{woeid}")]
+        public async Task<IActionResult> GetTrending(string woeid)
         {
-            HttpClient client = _twitterConnection.GetTwitterClient();
-            string url = $"1.1/trends/place.json?id=2";
-            HttpResponseMessage response = await client.GetAsync(url);
-            var responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await _twitterApiService.GetTrendingAsync(woeid);
 
             try
             {
-                if(!responseBody.Contains("bad request"))
+                if(responseBody.Contains("errors"))
                     return BadRequest(new { message = "Bad Request" });
 
                 return Ok(responseBody);

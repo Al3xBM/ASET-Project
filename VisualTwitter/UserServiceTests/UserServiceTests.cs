@@ -56,6 +56,7 @@ namespace UserServiceTests
             };
 
             _mapperMoq.Setup(moq => moq.Map<User>(registerModel)).Returns(user);
+    
         }
 
         [Test]

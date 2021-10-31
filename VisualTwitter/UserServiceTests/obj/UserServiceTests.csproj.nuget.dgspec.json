@@ -1,35 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj": {}
+    "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj": {}
   },
   "projects": {
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj": {
+    "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
+        "projectUniqueName": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
         "projectName": "UserServiceTests",
-        "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
-        "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
-        "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\obj\\",
+        "projectPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
+        "packagesPath": "A:\\Users\\theon\\.nuget\\packages\\",
+        "outputPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserServiceTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "A:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "A:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "A:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
-                "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj"
+              "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
+                "projectPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj"
               }
             }
           }
@@ -76,35 +76,32 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "A:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
+    "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+        "projectUniqueName": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
         "projectName": "UserService",
-        "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
-        "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
-        "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
+        "projectPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj",
+        "packagesPath": "A:\\Users\\theon\\.nuget\\packages\\",
+        "outputPath": "E:\\aset repo\\ASET-Project\\VisualTwitter\\UserService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "A:\\Users\\theon\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "A:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net5.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "A:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -182,7 +179,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "A:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -35,18 +35,15 @@ namespace UserService.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] UserRegisterDTO userDTO)
         {
-            // map model to entity
             var user = _mapper.Map<User>(userDTO);
 
             try
             {
-                // create user
                 _userRepository.Create(user, userDTO.Password);
                 return Ok(user);
             }
             catch (UserException ex)
             {
-                // return error message if there was an exception
                 return BadRequest(new { message = ex.Message });
             }
         }

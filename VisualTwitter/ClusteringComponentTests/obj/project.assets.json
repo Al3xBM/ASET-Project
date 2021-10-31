@@ -5154,19 +5154,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ionut\\.nuget\\packages\\": {}
+    "C:\\Users\\aliba\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\ClusteringComponentTests.csproj",
+      "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\ClusteringComponentTests.csproj",
       "projectName": "ClusteringComponentTests",
-      "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\ClusteringComponentTests.csproj",
-      "packagesPath": "C:\\Users\\ionut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\obj\\",
+      "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\ClusteringComponentTests.csproj",
+      "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
+      "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\ClusteringComponentTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ionut\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5180,8 +5180,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\ClusteringComponent\\ClusteringComponent.csproj": {
-              "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\ClusteringComponent\\ClusteringComponent.csproj"
+            "D:\\Git Repos\\ASET-Project\\VisualTwitter\\ClusteringComponent\\ClusteringComponent.csproj": {
+              "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\ClusteringComponent\\ClusteringComponent.csproj"
             }
           }
         }
@@ -5224,6 +5224,9 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
+          "Microsoft.AspNetCore.App": {
+            "privateAssets": "none"
+          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

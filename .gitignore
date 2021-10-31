@@ -6,3 +6,5 @@
 *.exe
 *.pdb
 *.props
+*.cache
+*.editorconfig

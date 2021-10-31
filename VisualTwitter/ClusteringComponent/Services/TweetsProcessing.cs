@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using UserService.Models;
 
 namespace ClusteringComponent.Services
 {
@@ -6,25 +10,91 @@ namespace ClusteringComponent.Services
     {
         //Calculates TF-IDF weight for each term t in tweet d
         // tf - idf(t,d) = tf(d,t) * idf(t)
-        private static float FindTFIDF(string tweet, string term)
+
+        private readonly TweetCollection tweetCollection;
+
+        public TweetsProcessing(TweetCollection collection)
         {
-            throw new NotImplementedException();
+            tweetCollection = collection;
         }
 
-        private static float FindTermFrequency(string tweet, string term)
+        private static List<string> GetTweetWords(string _tweet)
         {
-            throw new NotImplementedException();
+            string tweet = Regex.Replace(_tweet, @"[^\'\#\w\s]", "");
+            return tweet.Split(" ").ToList().Select(word => word.ToLower()).ToList();
         }
 
-        private static float FindInverseDocumentFrequency(string term)
+        public TweetCollection SetTweetCollection()
         {
-            throw new NotImplementedException();
+            List<TweetVector> tweetVectorWords = new();
+            foreach (string tweet in tweetCollection.GetTweetsContent())
+            {
+                Dictionary<string, double> wordFreq = new();
+                foreach (string word in GetTweetWords(tweet))
+                {
+                    wordFreq[word] = ComputeTFIDF(tweet, word);
+                }
+
+                tweetVectorWords.Add(new()
+                {
+                    Content = tweet,
+                    VectorSpace = wordFreq
+                });
+            }
+
+            return tweetCollection.SetTweetVector(tweetVectorWords);
+        }
+
+        private float ComputeTFIDF(string tweet, string term)
+        {
+            return ComputeTermFrequency(tweet, term) * ComputeInverseDocumentFrequency(term);
+        }
+
+        // tf(t,d) = count of term in d / number of words in d
+        private static float ComputeTermFrequency(string tweet, string term)
+        {
+            List<string> words = GetTweetWords(tweet);
+            int count = words.FindAll(word => word == term).Count;
+            return count / words.Count;
+        }
+
+        // idf(t) = log(N/(df + 1))
+        // df(t) = occurrence of t in documents
+        private float ComputeInverseDocumentFrequency(string term)
+        {
+            int count = 0;
+            foreach (string tweet in tweetCollection.GetTweetsContent())
+            {
+                count += GetTweetWords(tweet).FindAll(word => word.ToLower() == term.ToLower()).Count;
+            }
+
+            return (float)Math.Log(tweetCollection.GetTweetsContent().Count / (float)count);
         }
 
         // Finding Similarity Score
-        public static float FindCosineSimilarity(float[] vecA, float[] vecB)
+        public static double ComputeCosineSimilarity(double[] vecA, double[] vecB)
         {
-            throw new NotImplementedException();
+            /*
+                cos(alpha) = (a * b) / (||a|| * ||b||)
+                a = (a1, a2, ..., an);
+                b = (b1, b2, ..., bn);
+
+                K(X, Y) = <X, Y> / (||X||*||Y||)
+            */
+
+
+            double result = ComputeVectorsProduct(vecA, vecB) / (ComputeVectorNorm(vecA) * ComputeVectorNorm(vecB));
+            return result + double.MinValue;
+        }
+
+        private static double ComputeVectorNorm(double[] array)
+        {
+            return Math.Sqrt(array.Select(value => value * value).Sum());
+        }
+
+        private static double ComputeVectorsProduct(double[] vecA, double[] vecB)
+        {
+            return vecA.Zip(vecB, (a, b) => a * b).ToArray().Sum();
         }
     }
 }

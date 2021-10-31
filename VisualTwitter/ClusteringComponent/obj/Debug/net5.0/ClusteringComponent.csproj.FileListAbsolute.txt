@@ -56,3 +56,32 @@ E:\aset repo\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\Clu
 E:\aset repo\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ref\ClusteringComponent.dll
 E:\aset repo\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.pdb
 E:\aset repo\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.genruntimeconfig.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\appsettings.json
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.exe
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.deps.json
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.runtimeconfig.json
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.runtimeconfig.dev.json
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ref\ClusteringComponent.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\ClusteringComponent.pdb
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\Microsoft.OpenApi.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\bin\Debug\net5.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.csproj.AssemblyReference.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.AssemblyInfoInputs.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.AssemblyInfo.cs
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.csproj.CoreCompileInputs.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\staticwebassets\ClusteringComponent.StaticWebAssets.Manifest.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\staticwebassets\ClusteringComponent.StaticWebAssets.xml
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\scopedcss\bundle\ClusteringComponent.styles.css
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.RazorTargetAssemblyInfo.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ref\ClusteringComponent.dll
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.pdb
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.genruntimeconfig.cache
+C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\ClusteringComponent\obj\Debug\net5.0\ClusteringComponent.csproj.CopyComplete

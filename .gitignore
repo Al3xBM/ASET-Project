@@ -1,0 +1,8 @@
+
+*.config
+*.testlog
+*.manifest
+*.dll
+*.exe
+*.pdb
+*.props

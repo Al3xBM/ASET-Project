@@ -31,6 +31,7 @@ namespace DataManipulationService
 
             services.AddTransient<ITwitterConnection, TwitterConnection>();
             services.AddTransient<ITweetsManipulationService, TweetsManipulation>();
+            services.AddTransient<ITwitterApiService, TwitterApiService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -122,3 +122,4 @@ D:\Git Repos\ASET-Project\VisualTwitter\UserService\bin\Debug\net5.0\runtimes\wi
 D:\Git Repos\ASET-Project\VisualTwitter\UserService\bin\Debug\net5.0\runtimes\win-x64\native\e_sqlite3.dll
 D:\Git Repos\ASET-Project\VisualTwitter\UserService\bin\Debug\net5.0\runtimes\win-x86\native\e_sqlite3.dll
 D:\Git Repos\ASET-Project\VisualTwitter\UserService\obj\Debug\net5.0\UserService.csproj.CopyComplete
+D:\Git Repos\ASET-Project\VisualTwitter\UserService\obj\Debug\net5.0\UserService.csprojAssemblyReference.cache

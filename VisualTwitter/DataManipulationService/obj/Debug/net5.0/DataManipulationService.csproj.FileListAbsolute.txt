@@ -56,3 +56,4 @@ E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\obj\Debug\net5.0
 E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\obj\Debug\net5.0\ref\DataManipulationService.dll
 E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\obj\Debug\net5.0\DataManipulationService.pdb
 E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\obj\Debug\net5.0\DataManipulationService.genruntimeconfig.cache
+D:\Git Repos\ASET-Project\VisualTwitter\DataManipulationService\bin\Debug\net5.0\Newtonsoft.Json.dll

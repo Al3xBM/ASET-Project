@@ -7,4 +7,4 @@ build_property.PublishSingleFile =
 build_property.IncludeAllContentForSelfExtract = 
 build_property._SupportedPlatformList = Android,iOS,Linux,macOS,Windows
 build_property.RootNamespace = UserServiceTests
-build_property.ProjectDir = D:\Git Repos\ASET-Project\VisualTwitter\UserServiceTests\
+build_property.ProjectDir = C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\UserServiceTests\

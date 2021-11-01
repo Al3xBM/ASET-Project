@@ -6284,19 +6284,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\aliba\\.nuget\\packages\\": {}
+    "C:\\Users\\ionut\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
+      "projectUniqueName": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
       "projectName": "UserServiceTests",
-      "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
-      "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
-      "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserServiceTests\\obj\\",
+      "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\UserServiceTests\\UserServiceTests.csproj",
+      "packagesPath": "C:\\Users\\ionut\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\UserServiceTests\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ionut\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6310,8 +6310,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
-              "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj"
+            "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj": {
+              "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\UserService\\UserService.csproj"
             }
           }
         }
@@ -6358,9 +6358,6 @@
         "assetTargetFallback": true,
         "warn": true,
         "frameworkReferences": {
-          "Microsoft.AspNetCore.App": {
-            "privateAssets": "none"
-          },
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }

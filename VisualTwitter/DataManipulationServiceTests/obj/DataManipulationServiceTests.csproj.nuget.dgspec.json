@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj": {}
+    "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj": {}
   },
   "projects": {
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj": {
+    "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj",
+        "projectUniqueName": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj",
         "projectName": "DataManipulationServiceTests",
-        "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj",
-        "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
-        "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\obj\\",
+        "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\DataManipulationServiceTests.csproj",
+        "packagesPath": "C:\\Users\\ionut\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationServiceTests\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ionut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj": {
-                "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj"
+              "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj": {
+                "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj"
               }
             }
           }
@@ -76,9 +76,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
@@ -87,17 +84,17 @@
         }
       }
     },
-    "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj": {
+    "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
+        "projectUniqueName": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
         "projectName": "DataManipulationService",
-        "projectPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
-        "packagesPath": "C:\\Users\\aliba\\.nuget\\packages\\",
-        "outputPath": "D:\\Git Repos\\ASET-Project\\VisualTwitter\\DataManipulationService\\obj\\",
+        "projectPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\DataManipulationService.csproj",
+        "packagesPath": "C:\\Users\\ionut\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ionut\\Documents\\GitHub\\ASET-Project\\VisualTwitter\\DataManipulationService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "D:\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ionut\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

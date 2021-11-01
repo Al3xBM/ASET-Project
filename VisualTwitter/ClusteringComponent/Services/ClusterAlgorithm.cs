@@ -32,8 +32,8 @@ namespace ClusteringComponent.Services
              * more than once same document is added to the next cluster 
              * so avoid it using HasSet collection
              */
-            HashSet<int> uniqRand = new HashSet<int>();
-            //GenerateRandomNumber(ref uniqRand, k, documentCollection.Count);
+            var _randomNumbers = Enumerable.Range(1, k).OrderBy(g => Guid.NewGuid()).Take(tweetCollection.Count).ToArray();
+            HashSet<int> uniqRand = new(_randomNumbers);
 
             foreach (int pos in uniqRand)
             {
@@ -46,10 +46,9 @@ namespace ClusteringComponent.Services
             }
 
             bool stoppingCriteria = true;
-            List<Centroid> resultSet;
             List<Centroid> prevClusterCenter;
 
-            InitializeClusterCentroid(out resultSet, centroidCollection.Count);
+            InitializeClusterCentroid(out List<Centroid> resultSet, centroidCollection.Count);
 
             do
             {
@@ -59,26 +58,59 @@ namespace ClusteringComponent.Services
 
             } while (stoppingCriteria == false);
 
-
             return resultSet;
         }
 
         // Initializing cluster center
-        private static void InitializeClusterCentroid(out List<Centroid> centroid, int count)
+        private static void InitializeClusterCentroid(out List<Centroid> centroidList, int count)
         {
-            throw new NotImplementedException();
+            Centroid centroid;
+            centroidList = new List<Centroid>();
+            for (int i = 0; i < count; i++)
+            {
+                centroid = new Centroid();
+                centroid.GroupedTweets = new List<TweetVector>();
+                centroidList.Add(centroid);
+            }
         }
 
         // Finding closest cluster center
         private static int FindClosestClusterCenter(List<Centroid> clusterCenter, TweetVector obj)
         {
-            throw new NotImplementedException();
+            Func<double[], double[], double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
+            List<double> similarityMeasureList = clusterCenter
+                .Select(c => computeSimilarityFunc(c.GroupedTweets[0].VectorSpace.Values.ToArray(), 
+                    obj.VectorSpace.Values.ToArray()))
+                .ToList();
+
+            return clusterCenter.IndexOf(clusterCenter.Max());
         }
 
         // Identifying the new position of the cluster center
-        private static List<Centroid> CalculateMeanPoints(List<Centroid> _clusterCenter)
+        private static List<Centroid> CalculateMeanPoints(List<Centroid> clusterCenter)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < clusterCenter.Count; i++)
+            {
+                if (clusterCenter[i].GroupedTweets.Count > 0)
+                {
+                    for (int j = 0; j < clusterCenter[i].GroupedTweets[0].VectorSpace.Count; j++)
+                    {
+                        double total = 0;
+
+                        total = clusterCenter[i].GroupedTweets.Select(vector => vector.VectorSpace.Values.ToList()[j]).Sum();
+                        //reassign new calculated mean on each cluster center,
+                        //It indicates the reposition of centroid
+
+
+                        // in clusterCenter[i] la cheia J in GroupedTweets[0].VectorSpace adaugam media
+
+
+                        //clusterCenter[i].GroupedTweets[0].VectorSpace.Keys.ToArray()[j] = 
+                        //                    total / clusterCenter[i].GroupedTweets.Count;
+                    }
+                }
+            }
+            return clusterCenter;
         }
     }
 }

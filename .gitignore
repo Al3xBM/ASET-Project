@@ -8,3 +8,9 @@
 *.props
 *.cache
 *.editorconfig
+*.suo
+*.user
+_ReSharper.*
+bin
+obj
+packages

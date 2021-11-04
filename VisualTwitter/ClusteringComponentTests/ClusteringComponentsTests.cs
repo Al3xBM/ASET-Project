@@ -37,7 +37,7 @@ namespace TestClusteringComp
          * Testele au fost efectuate pe metode ajutatoare (private) din clasa TweetsProcessing
          **/
 
-        /*
+
         [Test]
         public void GetTweetWords()
         {
@@ -56,15 +56,15 @@ namespace TestClusteringComp
         public void GetTermFreq_for()
         {
             double count = TweetsProcessing.ComputeTermFrequency(tweet1, "for");
-            Assert.AreEqual(count, 0.085714285714285715d);
+            Assert.AreEqual(count, 0.0d);
         }
 
         [Test]
         public void GetInverseDocFreq_for()
         {
             double count = _tweetsProcessing.ComputeInverseDocumentFrequency("for");
-            Assert.AreEqual(count, -0.40546510810816444d);
+            Assert.AreEqual(count, -0.40546506643295288d);
         }
-        */
+
     }
 }

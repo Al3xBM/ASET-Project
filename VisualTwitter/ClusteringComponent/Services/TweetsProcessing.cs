@@ -18,7 +18,7 @@ namespace ClusteringComponent.Services
             tweetCollection = collection;
         }
 
-        private static List<string> GetTweetWords(string _tweet)
+        public static List<string> GetTweetWords(string _tweet)
         {
             string tweet = Regex.Replace(_tweet, @"[^\'\#\w\s]", "");
             return tweet.Split(" ").ToList().Select(word => word.ToLower()).ToList();
@@ -45,13 +45,13 @@ namespace ClusteringComponent.Services
             return tweetCollection.SetTweetVector(tweetVectorWords);
         }
 
-        private float ComputeTFIDF(string tweet, string term)
+        public float ComputeTFIDF(string tweet, string term)
         {
             return ComputeTermFrequency(tweet, term) * ComputeInverseDocumentFrequency(term);
         }
 
         // tf(t,d) = count of term in d / number of words in d
-        private static float ComputeTermFrequency(string tweet, string term)
+        public static float ComputeTermFrequency(string tweet, string term)
         {
             List<string> words = GetTweetWords(tweet);
             int count = words.FindAll(word => word == term).Count;
@@ -60,7 +60,7 @@ namespace ClusteringComponent.Services
 
         // idf(t) = log(N/(df + 1))
         // df(t) = occurrence of t in documents
-        private float ComputeInverseDocumentFrequency(string term)
+        public float ComputeInverseDocumentFrequency(string term)
         {
             int count = 0;
             foreach (string tweet in tweetCollection.GetTweetsContent())
@@ -87,12 +87,12 @@ namespace ClusteringComponent.Services
             return result + double.MinValue;
         }
 
-        private static double ComputeVectorNorm(double[] array)
+        public static double ComputeVectorNorm(double[] array)
         {
             return Math.Sqrt(array.Select(value => value * value).Sum());
         }
 
-        private static double ComputeVectorsProduct(double[] vecA, double[] vecB)
+        public static double ComputeVectorsProduct(double[] vecA, double[] vecB)
         {
             return vecA.Zip(vecB, (a, b) => a * b).ToArray().Sum();
         }

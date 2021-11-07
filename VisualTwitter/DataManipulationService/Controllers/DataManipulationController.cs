@@ -38,9 +38,11 @@ namespace DataManipulationService.Controllers
         }
 
         [HttpGet("{topic}")]
-        public IActionResult SearchTopic(string topic)
+        public async Task<IActionResult> SearchTopic(string topic)
         {
-            throw new NotImplementedException();
+            var responseBody = await _twitterApiService.GetTweetsSample();
+
+            return null;
         }
     }
 }

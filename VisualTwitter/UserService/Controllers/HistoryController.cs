@@ -23,13 +23,15 @@ namespace UserService.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetSearchResult(int id)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult GetSearchResult(int id, [FromBody] object userDTO)
         {
-            throw new NotImplementedException(); ;
+            throw new NotImplementedException();
         }
 
         [HttpPut("{id}")]
-        public IActionResult Delete(int id)
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        public IActionResult Delete(int id, [FromBody] object userDTO)
         {
             throw new NotImplementedException();
         }

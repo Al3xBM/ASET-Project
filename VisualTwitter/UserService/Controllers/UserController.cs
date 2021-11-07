@@ -112,14 +112,27 @@ namespace UserService.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         public IActionResult GetById(int id)
         {
-            throw new NotImplementedException(); ;
+            var user = _userRepository.GetById(id);
+            var model = _mapper.Map<UserDTO>(user);
+            return Ok(model);
         }
 
         [HttpDelete("{id}")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromBody] UserUpdateDTO userDTO)
         {
-            throw new NotImplementedException();
+            var user = _mapper.Map<User>(userDTO);
+            user.Id = id;
+
+            try
+            { 
+                _userRepository.Update(user, userDTO.Password);
+                return NoContent();
+            }
+            catch (UserException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

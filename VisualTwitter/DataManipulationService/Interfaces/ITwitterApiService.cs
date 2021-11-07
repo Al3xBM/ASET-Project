@@ -1,6 +1,5 @@
-﻿using System;
+﻿using DataManipulationService.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataManipulationService.Interfaces
@@ -8,5 +7,7 @@ namespace DataManipulationService.Interfaces
     public interface ITwitterApiService
     {
         public Task<string> GetTrendingAsync(string id);
+
+        public Task<List<Tweet>> GetTweetsSample();
     }
 }

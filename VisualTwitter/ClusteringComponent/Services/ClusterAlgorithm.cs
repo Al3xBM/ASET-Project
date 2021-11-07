@@ -9,107 +9,155 @@ namespace ClusteringComponent.Services
     // K-Means Algorithm Implementation
     public class ClusterAlgorithm
     {
-        public static List<Centroid> PrepareTweetCluster(int k, List<TweetVector> tweetCollection, ref int _counter)
-        {
-            /**
-             * initialize the k means
-             * use means to initialize clustering       => InitializeClusterCentroid()
-             * loop at most maxIter times
-             * use new clustering to update means       => FindClosestClusterCenter()
-             *   use new means to update clustering     => CalculateMeanPoints()
-             *   exit loop if no change to clustering or
-             *   clustering would create an empty cluster
-             * end-loop
-             * return clustering
-             */
+        private static readonly double EPSILON = 0.00001;
+        private static readonly int MAX_ITERATIONS = 500;
+        /**
+         * Step 1: select k
+         * Step 2: randomly select k distinct data points 
+         * Step 3: measure the distance between the first tweet vector
+            and the k initial clusters 
+         * Step 4: assign the first point to the nearest cluster. And so on..
+         * Step 5: calculate the mean of each cluster 
+         
+         * Stop: repet steps until the cluster centroids don't change their position*/
 
-            //prepares k initial centroid and assign one object randomly to each centroid
-            List<Centroid> centroidCollection = new();
+        public static List<Centroid> PrepareTweetCluster(int k, List<TweetVector> tweetCollection)
+        {
+            /*
+             * **** STEP 1 ****
+             * 
+             * prepares k initial centroid and assign one object randomly to each centroid
+             */
+            List<Centroid> centroidCollection = new(k);     // k clusters
             Centroid centroid;
+            int iterationNumber = 0;
+
 
             /*
-             * Avoid repeation of random number, if same no is generated 
-             * more than once same document is added to the next cluster 
-             * so avoid it using HasSet collection
+             * **** STEP 2 ****
+             * 
+             * Avoid repeation of random number => HashSet collection
              */
-            var _randomNumbers = Enumerable.Range(1, k).OrderBy(g => Guid.NewGuid()).Take(tweetCollection.Count).ToArray();
+            int[] _randomNumbers = Enumerable.Range(1, k).OrderBy(g => Guid.NewGuid()).Take(tweetCollection.Count).ToArray();
             HashSet<int> uniqRand = new(_randomNumbers);
 
-            foreach (int pos in uniqRand)
+            // in each cluster, the centroid will be on first position in GroupedTweets list
+            centroidCollection = uniqRand.Select(i =>
             {
                 centroid = new Centroid
                 {
                     GroupedTweets = new List<TweetVector>()
                 };
-                centroid.GroupedTweets.Add(tweetCollection[pos]);
-                centroidCollection.Add(centroid);
-            }
+                centroid.GroupedTweets.Add(tweetCollection[i]);
+                return centroid;
+            }).ToList();
 
             bool stoppingCriteria = true;
-            List<Centroid> prevClusterCenter;
+            List<Centroid> prevClusterCendroid;
 
             InitializeClusterCentroid(out List<Centroid> resultSet, centroidCollection.Count);
 
             do
             {
-                prevClusterCenter = centroidCollection;
+                iterationNumber++;
 
-                // TODO
+                prevClusterCendroid = centroidCollection;
 
+                /*
+                 * **** STEP 3 & STEP 4 ****
+                 */
+                foreach (TweetVector tweet in tweetCollection)
+                {
+                    int index = FindClosestClusterCenter(centroidCollection, tweet);
+                    resultSet[index].GroupedTweets.Add(tweet);
+                }
+
+                InitializeClusterCentroid(out centroidCollection, centroidCollection.Count);
+
+                /*
+                 * **** STEP 5 ****
+                 */
+                centroidCollection = CalculateMeanPoints(resultSet); 
+                
+                stoppingCriteria = CheckStoppingCriteria(prevClusterCendroid, centroidCollection, iterationNumber);
+                if (!stoppingCriteria)
+                {
+                    // initialize the result set for next iteration
+                    InitializeClusterCentroid(out resultSet, centroidCollection.Count);
+                }
             } while (stoppingCriteria == false);
 
             return resultSet;
         }
 
-        // Initializing cluster center
-        private static void InitializeClusterCentroid(out List<Centroid> centroidList, int count)
+        /*
+         * The algorithm will stops if and only if a number of iterations reached up a maximum
+         * or if and only if current cluster centroids have the same positions as previous cluster centroids
+         * at a certain iteration.
+         */
+        private static bool CheckStoppingCriteria(List<Centroid> previous, List<Centroid> current, int iteration)
         {
-            Centroid centroid;
-            centroidList = new List<Centroid>();
-            for (int i = 0; i < count; i++)
-            {
-                centroid = new Centroid();
-                centroid.GroupedTweets = new List<TweetVector>();
-                centroidList.Add(centroid);
-            }
+            // TODO
+            return iteration == MAX_ITERATIONS;
         }
 
-        // Finding closest cluster center
+        /*
+         * Initializing cluster center
+         */
+        private static void InitializeClusterCentroid(out List<Centroid> centroidList, int count)
+        {
+            centroidList = Enumerable.Range(0, count).Select(i =>
+            {
+                Centroid centroid = new();
+                centroid.GroupedTweets = new List<TweetVector>();
+                return centroid;
+            }).ToList();
+        }
+
+        /*
+         * Finding closest cluster center
+         */
         private static int FindClosestClusterCenter(List<Centroid> clusterCenter, TweetVector obj)
         {
             Func<double[], double[], double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
             List<double> similarityMeasureList = clusterCenter
-                .Select(c => computeSimilarityFunc(c.GroupedTweets[0].VectorSpace.Values.ToArray(), 
+                .Select(centroid => computeSimilarityFunc(centroid.GroupedTweets[0].VectorSpace.Values.ToArray(), 
                     obj.VectorSpace.Values.ToArray()))
                 .ToList();
 
             return clusterCenter.IndexOf(clusterCenter.Max());
         }
 
-        // Identifying the new position of the cluster center
+        /*
+         * Identifying the new position of the cluster center
+         * 
+         * The center is always found at first position of GroupedTweets collecion
+         */
         private static List<Centroid> CalculateMeanPoints(List<Centroid> clusterCenter)
         {
-            for (int i = 0; i < clusterCenter.Count; i++)
-            {
-                if (clusterCenter[i].GroupedTweets.Count > 0)
+            string key;
+            double total;
+            int j;
+
+            // iterate through each cluster centroids
+            clusterCenter = clusterCenter.Select(centroid => {
+                if (centroid.GroupedTweets.Count > 0)
                 {
-                    for (int j = 0; j < clusterCenter[i].GroupedTweets[0].VectorSpace.Count; j++)
+                    // loop through values of first tweet vector space
+                    for (j = 0; j < centroid.GroupedTweets[0].VectorSpace.Count; j++)
                     {
-                        double total = 0;
+                        // compute sum over column j values of each tweet vector space
+                        total = centroid.GroupedTweets.Select(vector => vector.VectorSpace.ElementAt(j).Value).Sum();
 
-                        total = clusterCenter[i].GroupedTweets.Select(vector => vector.VectorSpace.Values.ToList()[j]).Sum();
-                        //reassign new calculated mean on each cluster center,
-                        //It indicates the reposition of centroid
+                        // identify vector space key of first tweet vector in this cluster
+                        key = centroid.GroupedTweets[0].VectorSpace.Keys.ElementAt(j);
 
-
-                        // in clusterCenter[i] la cheia J in GroupedTweets[0].VectorSpace adaugam media
-
-
-                        //clusterCenter[i].GroupedTweets[0].VectorSpace.Keys.ToArray()[j] = 
-                        //                    total / clusterCenter[i].GroupedTweets.Count;
+                        // compute mean and update vector space values (key position = j)
+                        centroid.GroupedTweets[0].VectorSpace[key] = total / centroid.GroupedTweets.Count;
                     }
                 }
-            }
+                return centroid;
+            }).ToList();
             return clusterCenter;
         }
     }

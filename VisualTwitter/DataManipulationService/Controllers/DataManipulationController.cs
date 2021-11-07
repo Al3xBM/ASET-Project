@@ -1,6 +1,7 @@
 ﻿using DataManipulationService.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -19,17 +20,35 @@ namespace DataManipulationService.Controllers
             _twitterApiService = twitterApiService;
         }
 
-        [HttpGet("trending/{woeid}")]
-        public async Task<IActionResult> GetTrending(string woeid)
+        [HttpGet("trending/{region}")]
+        public async Task<IActionResult> GetTrending(string region)
         {
-            var responseBody = await _twitterApiService.GetTrendingAsync(woeid);
+            
 
             try
             {
-                if(responseBody.Contains("errors"))
+                var availableTrendsResponse = await _twitterApiService.GetAvailableTrendsAsync();
+                if(availableTrendsResponse.Contains("errors"))
                     return BadRequest(new { message = "Bad Request" });
+                if (!availableTrendsResponse.Contains($"{region}"))
+                    return NotFound(new { message = "No trends available for the specified region" });
+                string woeid = "";
 
-                return Ok(responseBody);
+                dynamic availableTrends = JsonConvert.DeserializeObject(availableTrendsResponse);
+                foreach(var trend in availableTrends)
+                {
+                    if (trend["country"] == region)
+                    {
+                        woeid = trend["woeid"];
+                        break;
+                    }
+                }
+                var trendsList = await _twitterApiService.GetTrendingAsync(woeid);
+                if (trendsList.Contains("errors"))
+                {
+                    return BadRequest(new { message = " Bad Request on GetTrendingAsync" });
+                }
+                return Ok(trendsList);
             }
             catch (JsonException ex)
             {

@@ -2,6 +2,7 @@
 using DataManipulationService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,31 +22,53 @@ namespace DataManipulationService.Services.TwitterApiService
 
         public async Task<List<Tweet>> GetTweetsSample()
         {
-            /*            HttpClient client = _twitterConnection.GetTwitterClient();
-                        string url = "1.1/statuses/lookup.json";
-                        var response = await client.GetAsync(url);*/
-            var url = "https://api.twitter.com/2/tweets/sample/stream?tweet.fields=public_metrics,entities";
+            var tweetsSample = new List<Tweet>();
+                        HttpClient client = _twitterConnection.GetTwitterClient();
+                        string url = "2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
+                        var response = await client.GetStreamAsync(url);
+            //var url = "https://api.twitter.com/2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
 
-            var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-
-            httpRequest.Headers["Authorization"] = "Bearer AAAAAAAAAAAAAAAAAAAAADNBVAEAAAAAbPgNZMC0c6Xi36hhzeXSHCybMrw%3DLUJeo7KwkSr547hIYi8j7Km9c9mhMBlpIJd7zhcdbghtKViulX";
+            //var httpRequest = (HttpWebRequest)WebRequest.Create(url);
             
-            var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
+            //httpRequest.Headers["Authorization"] = "Bearer AAAAAAAAAAAAAAAAAAAAADNBVAEAAAAAbPgNZMC0c6Xi36hhzeXSHCybMrw%3DLUJeo7KwkSr547hIYi8j7Km9c9mhMBlpIJd7zhcdbghtKViulX";
+            
+            //var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
             string buffer = "";
-            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            using (var streamReader = new StreamReader(response))
             {
-                int count = 10000;
+                int count = 1000;
                 while(count > 0)
                 {
                     var result = streamReader.ReadLine();
-                    File.AppendAllLines("WriteLines.txt", new List<string>() { result });
-                    --count;
+                    JObject initialData=null;
+                    try {
+                        if (result == "")
+                        {
+                            continue;
+                        }
+                         initialData = JObject.Parse(result);
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                    
+
+                    var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
+                    
+                    if (tweet.entities.hashtags != null && tweet.lang=="en")
+                    {
+                        tweetsSample.Add(tweet);
+                        File.AppendAllLines("WriteLines.txt", new List<string>() { result });
+                        --count;
+                    }
+                    
                 }
 
             }
 
-            Console.WriteLine(httpResponse.StatusCode);
-            return null;
+            //Console.WriteLine(httpResponse.StatusCode);
+            return tweetsSample;
         }
 
         public async Task<string> GetTrendingAsync(string id)
@@ -57,6 +80,13 @@ namespace DataManipulationService.Services.TwitterApiService
             
         }
 
+        public async Task<string> GetAvailableTrendsAsync()
+        {
+            HttpClient client = _twitterConnection.GetTwitterClient();
+            string url = $"1.1/trends/available.json";
+            HttpResponseMessage response = await client.GetAsync(url);
+            return await response.Content.ReadAsStringAsync();
+        }
         
     }
 }

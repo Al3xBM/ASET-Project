@@ -1,5 +1,6 @@
 ﻿using DataManipulationService.Interfaces;
 using DataManipulationService.Models;
+using DataManipulationService.MOP;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -71,6 +72,7 @@ namespace DataManipulationService.Services.TwitterApiService
             return tweetsSample;
         }
 
+        [TwitterApiServiceMonitor]
         public async Task<string> GetTrendingAsync(string id)
         {
             HttpClient client = _twitterConnection.GetTwitterClient();

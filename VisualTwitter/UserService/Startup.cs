@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +30,10 @@ namespace UserService
         {
 
             services.AddControllers();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserService", Version = "v1" });
+            });
             services.AddDbContext<DataContext>( options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));

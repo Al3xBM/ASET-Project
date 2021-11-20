@@ -20,7 +20,7 @@ namespace DataManipulationService.Services.TwitterApiService
         {
             _twitterConnection = twitterConnection;
         }
-
+        [TwitterApiServiceMonitor]
         public async Task<List<Tweet>> GetTweetsSample()
         {
             var tweetsSample = new List<Tweet>();
@@ -37,7 +37,7 @@ namespace DataManipulationService.Services.TwitterApiService
             string buffer = "";
             using (var streamReader = new StreamReader(response))
             {
-                int count = 1000;
+                int count = 10;
                 while(count > 0)
                 {
                     var result = streamReader.ReadLine();
@@ -81,7 +81,7 @@ namespace DataManipulationService.Services.TwitterApiService
             return await response.Content.ReadAsStringAsync();
             
         }
-
+        [TwitterApiServiceMonitor]
         public async Task<string> GetAvailableTrendsAsync()
         {
             HttpClient client = _twitterConnection.GetTwitterClient();

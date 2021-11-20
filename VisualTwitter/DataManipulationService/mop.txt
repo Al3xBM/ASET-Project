@@ -1,0 +1,12 @@
+GetAvailableTrendsAsync called successfully 
+GetAvailableTrendsAsync correct response  
+GetTrendingAsync called successfully 
+GetAvailableTrendsAsync called successfully 
+GetAvailableTrendsAsync correct response  
+GetTrendingAsync called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample correct response  
+GetTweetsSample called successfully 
+GetTweetsSample correct response  

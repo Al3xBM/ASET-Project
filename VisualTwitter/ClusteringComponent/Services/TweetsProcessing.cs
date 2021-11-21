@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClusteringComponent.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -24,25 +25,25 @@ namespace ClusteringComponent.Services
             return tweet.Split(" ").ToList().Select(word => word.ToLower()).ToList();
         }
 
-        public TweetCollection SetTweetCollection()
+        public void SetTweetCollection()
         {
             List<TweetVector> tweetVectorWords = new();
-            foreach (string tweet in tweetCollection.GetTweetsContent())
+            foreach (Tweet tweet in tweetCollection.GetTweetsContent())
             {
                 Dictionary<string, double> wordFreq = new();
-                foreach (string word in GetTweetWords(tweet))
+                foreach (string word in GetTweetWords(tweet.Content))
                 {
-                    wordFreq[word] = ComputeTFIDF(tweet, word);
+                    wordFreq[word] = ComputeTFIDF(tweet.Content, word);
                 }
 
                 tweetVectorWords.Add(new()
                 {
-                    Content = tweet,
+                    Content = tweet.Content,
                     VectorSpace = wordFreq
                 });
             }
 
-            return tweetCollection.SetTweetVector(tweetVectorWords);
+            tweetCollection.SetTweetVector(tweetVectorWords);
         }
 
         public float ComputeTFIDF(string tweet, string term)
@@ -63,9 +64,9 @@ namespace ClusteringComponent.Services
         public float ComputeInverseDocumentFrequency(string term)
         {
             int count = 0;
-            foreach (string tweet in tweetCollection.GetTweetsContent())
+            foreach (Tweet tweet in tweetCollection.GetTweetsContent())
             {
-                count += GetTweetWords(tweet).FindAll(word => word.ToLower() == term.ToLower()).Count;
+                count += GetTweetWords(tweet.Content).FindAll(word => word.ToLower() == term.ToLower()).Count;
             }
 
             return (float)Math.Log(tweetCollection.GetTweetsContent().Count / (float)count);

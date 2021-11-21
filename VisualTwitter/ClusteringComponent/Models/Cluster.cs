@@ -6,7 +6,7 @@ using UserService.Models;
 
 namespace ClusteringComponent.Models
 {
-    public class Centroid
+    public class Cluster
     {
         public List<TweetVector> GroupedTweets { get; set; }
     }

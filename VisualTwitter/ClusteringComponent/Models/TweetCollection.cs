@@ -1,23 +1,22 @@
-﻿using System.Collections.Generic;
+﻿using ClusteringComponent.Models;
+using System.Collections.Generic;
 
 namespace UserService.Models
 {
     public class TweetCollection
     {
         // represtnts all the tweets to be clustered
-        private List<string> _tweetList;
+        private List<Tweet> _tweetList;
         private List<TweetVector> _tweetVectors;
 
-        public TweetCollection SetTweetList(List<string> tweetList)
+        public void SetTweetList(List<Tweet> tweetList)
         {
             _tweetList = tweetList;
-            return this;
         }
 
-        public TweetCollection SetTweetVector(List<TweetVector> tweetVector)
+        public void SetTweetVector(List<TweetVector> tweetVector)
         {
             _tweetVectors = tweetVector;
-            return this;
         }
 
         public List<TweetVector> GetTweetVectors()
@@ -25,9 +24,9 @@ namespace UserService.Models
             return new List<TweetVector>(_tweetVectors);
         }
 
-        public List<string> GetTweetsContent()
+        public List<Tweet> GetTweetsContent()
         {
-            return new List<string>(_tweetList);
+            return new List<Tweet>(_tweetList);
         }
     }
 }

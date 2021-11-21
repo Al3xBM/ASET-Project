@@ -4,7 +4,7 @@ namespace UserService.Models
 {
     public class TweetVector
     {
-        // Content represents the tweet (or any other object) to be clustered
+        // Content represents the tweet to be clustered
         public string Content { get; set; }
 
         // represents the tf*idf of each tweet word

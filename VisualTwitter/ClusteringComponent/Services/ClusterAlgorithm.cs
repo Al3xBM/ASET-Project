@@ -10,7 +10,7 @@ namespace ClusteringComponent.Services
     public class ClusterAlgorithm
     {
         private static readonly double EPSILON = 0.00001;
-        private static readonly int MAX_ITERATIONS = 500;
+        private static readonly int MAX_ITERATIONS = 10;
         /**
          * Step 1: select k
          * Step 2: randomly select k distinct data points 
@@ -21,15 +21,15 @@ namespace ClusteringComponent.Services
          
          * Stop: repet steps until the cluster centroids don't change their position*/
 
-        public static List<Centroid> PrepareTweetCluster(int k, List<TweetVector> tweetCollection)
+        public static List<Cluster> PrepareTweetCluster(int k, List<TweetVector> tweetCollection)
         {
             /*
              * **** STEP 1 ****
              * 
              * prepares k initial centroid and assign one object randomly to each centroid
              */
-            List<Centroid> centroidCollection = new(k);     // k clusters
-            Centroid centroid;
+            List<Cluster> centroidCollection = new(k);     // k clusters
+            Cluster centroid;
             int iterationNumber = 0;
 
 
@@ -44,7 +44,7 @@ namespace ClusteringComponent.Services
             // in each cluster, the centroid will be on first position in GroupedTweets list
             centroidCollection = uniqRand.Select(i =>
             {
-                centroid = new Centroid
+                centroid = new Cluster
                 {
                     GroupedTweets = new List<TweetVector>()
                 };
@@ -53,9 +53,9 @@ namespace ClusteringComponent.Services
             }).ToList();
 
             bool stoppingCriteria = true;
-            List<Centroid> prevClusterCendroid;
+            List<Cluster> prevClusterCendroid;
 
-            InitializeClusterCentroid(out List<Centroid> resultSet, centroidCollection.Count);
+            InitializeClusterCentroid(out List<Cluster> resultSet, centroidCollection.Count);
 
             do
             {
@@ -95,7 +95,7 @@ namespace ClusteringComponent.Services
          * or if and only if current cluster centroids have the same positions as previous cluster centroids
          * at a certain iteration.
          */
-        private static bool CheckStoppingCriteria(List<Centroid> previous, List<Centroid> current, int iteration)
+        private static bool CheckStoppingCriteria(List<Cluster> previous, List<Cluster> current, int iteration)
         {
             // TODO
             return iteration == MAX_ITERATIONS;
@@ -104,11 +104,11 @@ namespace ClusteringComponent.Services
         /*
          * Initializing cluster center
          */
-        private static void InitializeClusterCentroid(out List<Centroid> centroidList, int count)
+        private static void InitializeClusterCentroid(out List<Cluster> centroidList, int count)
         {
             centroidList = Enumerable.Range(0, count).Select(i =>
             {
-                Centroid centroid = new();
+                Cluster centroid = new();
                 centroid.GroupedTweets = new List<TweetVector>();
                 return centroid;
             }).ToList();
@@ -117,7 +117,7 @@ namespace ClusteringComponent.Services
         /*
          * Finding closest cluster center
          */
-        private static int FindClosestClusterCenter(List<Centroid> clusterCenter, TweetVector obj)
+        private static int FindClosestClusterCenter(List<Cluster> clusterCenter, TweetVector obj)
         {
             Func<double[], double[], double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
             List<double> similarityMeasureList = clusterCenter
@@ -133,7 +133,7 @@ namespace ClusteringComponent.Services
          * 
          * The center is always found at first position of GroupedTweets collecion
          */
-        private static List<Centroid> CalculateMeanPoints(List<Centroid> clusterCenter)
+        private static List<Cluster> CalculateMeanPoints(List<Cluster> clusterCenter)
         {
             string key;
             double total;

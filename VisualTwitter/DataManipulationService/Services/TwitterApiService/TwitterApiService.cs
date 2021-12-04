@@ -16,9 +16,11 @@ namespace DataManipulationService.Services.TwitterApiService
     public class TwitterApiService : ITwitterApiService
     {
         private readonly ITwitterConnection _twitterConnection;
-        public TwitterApiService(ITwitterConnection twitterConnection)
+        private readonly IDatabaseService _databaseService;
+        public TwitterApiService(ITwitterConnection twitterConnection, IDatabaseService databaseService)
         {
             _twitterConnection = twitterConnection;
+            _databaseService = databaseService;
         }
         [TwitterApiServiceMonitor]
         public async Task<List<Tweet>> GetTweetsSample()
@@ -37,7 +39,7 @@ namespace DataManipulationService.Services.TwitterApiService
             string buffer = "";
             using (var streamReader = new StreamReader(response))
             {
-                int count = 10;
+                int count = 5;
                 while(count > 0)
                 {
                     var result = streamReader.ReadLine();
@@ -56,9 +58,10 @@ namespace DataManipulationService.Services.TwitterApiService
                     
 
                     var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
-                    
+
                     if (tweet.entities.hashtags != null && tweet.lang=="en")
                     {
+                        _databaseService.insertTweet(tweet);
                         tweetsSample.Add(tweet);
                         File.AppendAllLines("WriteLines.txt", new List<string>() { result });
                         --count;

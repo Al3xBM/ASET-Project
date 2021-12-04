@@ -4,6 +4,6 @@ namespace DataManipulationService.Models
 {
     public class Entity
     {
-        public List<dynamic> hashtags { get; set; }
+        public IList<Hashtag> hashtags { get; set; }
     }
 }

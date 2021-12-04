@@ -1,4 +1,5 @@
 using DataManipulationService.Interfaces;
+using DataManipulationService.Services;
 using DataManipulationService.Services.TwitterApiService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace DataManipulationService
             services.AddTransient<ITwitterConnection, TwitterConnection>();
             services.AddTransient<ITweetsManipulationService, TweetsManipulation>();
             services.AddTransient<ITwitterApiService, TwitterApiService>();
+            services.AddTransient<IDatabaseConnection, DatabaseConnection>();
+            services.AddTransient<IDatabaseService, DatabaseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

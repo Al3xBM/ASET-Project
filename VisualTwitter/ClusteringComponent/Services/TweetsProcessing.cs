@@ -1,6 +1,7 @@
 ﻿using ClusteringComponent.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using UserService.Models;
@@ -22,7 +23,7 @@ namespace ClusteringComponent.Services
         public static List<string> GetTweetWords(string _tweet)
         {
             string tweet = Regex.Replace(_tweet, @"[^\'\#\w\s]", "");
-            return tweet.Split(" ").ToList().Select(word => word.ToLower()).ToList();
+            return tweet.ToLower().Split(" ").ToList();
         }
 
         public void SetTweetCollection()
@@ -73,7 +74,7 @@ namespace ClusteringComponent.Services
         }
 
         // Finding Similarity Score
-        public static double ComputeCosineSimilarity(double[] vecA, double[] vecB)
+        public static double ComputeCosineSimilarity(List<double> vecA, List<double> vecB)
         {
             /*
                 cos(alpha) = (a * b) / (||a|| * ||b||)
@@ -88,13 +89,14 @@ namespace ClusteringComponent.Services
             return result + double.MinValue;
         }
 
-        public static double ComputeVectorNorm(double[] array)
+        public static double ComputeVectorNorm(List<double> array)
         {
             return Math.Sqrt(array.Select(value => value * value).Sum());
         }
 
-        public static double ComputeVectorsProduct(double[] vecA, double[] vecB)
+        public static double ComputeVectorsProduct(List<double> vecA, List<double> vecB)
         {
+            Debug.WriteLine("vecA = " + vecA.Count + "; vecB = " + vecB.Count);
             return vecA.Zip(vecB, (a, b) => a * b).ToArray().Sum();
         }
     }

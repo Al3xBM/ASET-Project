@@ -6,7 +6,9 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using UserService.Models;
+using System.Diagnostics;
 
+using System.Linq;
 namespace ClusteringComponent.Controllers
 {
     public class ClusterController : ControllerBase
@@ -29,7 +31,7 @@ namespace ClusteringComponent.Controllers
             {
                 JObject json = JObject.Parse(line);
 
-                Console.WriteLine("i = " + i++);
+                //Console.WriteLine("i = " + i++);
 
                 var urls = json["data"]["entities"]["urls"];
                 tweets.Add(new Tweet()
@@ -39,15 +41,17 @@ namespace ClusteringComponent.Controllers
                 });
             }
 
+            Debug.WriteLine("lines = " + lines.Length);
+
             TweetCollection collection = new TweetCollection();
             collection.SetTweetList(tweets);
 
             TweetsProcessing processing = new TweetsProcessing(collection);
             processing.SetTweetCollection();
 
-            List<Cluster> clusters = ClusterAlgorithm.PrepareTweetCluster(3, collection.GetTweetVectors());
-            
+            List<Cluster> clusters = ClusterAlgorithm.PrepareTweetCluster(2, collection.GetTweetVectors());
 
+            Debug.WriteLine("clusters = " + clusters.Count);
 
             return "DONE";
         }

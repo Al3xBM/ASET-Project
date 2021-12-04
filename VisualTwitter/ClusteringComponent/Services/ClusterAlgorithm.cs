@@ -1,6 +1,7 @@
 ﻿using ClusteringComponent.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using UserService.Models;
 
@@ -55,11 +56,12 @@ namespace ClusteringComponent.Services
             bool stoppingCriteria = true;
             List<Cluster> prevClusterCendroid;
 
-            InitializeClusterCentroid(out List<Cluster> resultSet, centroidCollection.Count);
+            InitializeClusterCentroid(out List<Cluster> resultSet, k);
 
             do
             {
                 iterationNumber++;
+                Debug.WriteLine("iter = " + iterationNumber);
 
                 prevClusterCendroid = centroidCollection;
 
@@ -72,7 +74,7 @@ namespace ClusteringComponent.Services
                     resultSet[index].GroupedTweets.Add(tweet);
                 }
 
-                InitializeClusterCentroid(out centroidCollection, centroidCollection.Count);
+                InitializeClusterCentroid(out centroidCollection, k);
 
                 /*
                  * **** STEP 5 ****
@@ -83,8 +85,9 @@ namespace ClusteringComponent.Services
                 if (!stoppingCriteria)
                 {
                     // initialize the result set for next iteration
-                    InitializeClusterCentroid(out resultSet, centroidCollection.Count);
+                    InitializeClusterCentroid(out resultSet, k);
                 }
+
             } while (stoppingCriteria == false);
 
             return resultSet;
@@ -119,13 +122,14 @@ namespace ClusteringComponent.Services
          */
         private static int FindClosestClusterCenter(List<Cluster> clusterCenter, TweetVector obj)
         {
-            Func<double[], double[], double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
+            Func<List<double>, List<double>, double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
             List<double> similarityMeasureList = clusterCenter
-                .Select(centroid => computeSimilarityFunc(centroid.GroupedTweets[0].VectorSpace.Values.ToArray(), 
-                    obj.VectorSpace.Values.ToArray()))
+                .Select(centroid => computeSimilarityFunc(centroid.GroupedTweets[0].VectorSpace.Values.ToList(), 
+                    obj.VectorSpace.Values.ToList()))
                 .ToList();
 
-            return clusterCenter.IndexOf(clusterCenter.Max());
+
+            return similarityMeasureList.IndexOf(similarityMeasureList.Max());
         }
 
         /*
@@ -135,28 +139,35 @@ namespace ClusteringComponent.Services
          */
         private static List<Cluster> CalculateMeanPoints(List<Cluster> clusterCenter)
         {
-            string key;
             double total;
-            int j;
 
             // iterate through each cluster centroids
-            clusterCenter = clusterCenter.Select(centroid => {
-                if (centroid.GroupedTweets.Count > 0)
+            clusterCenter = clusterCenter.Select(cluster => {
+                if (cluster.GroupedTweets.Count > 0)
                 {
+                    foreach (var word in cluster.GroupedTweets[0].VectorSpace.Keys)
+                    {
+                        total = cluster.GroupedTweets.Select(vector => vector.VectorSpace.ContainsKey(word) ? vector.VectorSpace[word] : 0.0).Sum();
+
+                        cluster.GroupedTweets[0].VectorSpace[word] = total / cluster.GroupedTweets.Count;
+                    }
+
+
+                    /*
                     // loop through values of first tweet vector space
-                    for (j = 0; j < centroid.GroupedTweets[0].VectorSpace.Count; j++)
+                    for (j = 0; j < cluster.GroupedTweets[0].VectorSpace.Count; j++)
                     {
                         // compute sum over column j values of each tweet vector space
-                        total = centroid.GroupedTweets.Select(vector => vector.VectorSpace.ElementAt(j).Value).Sum();
+                        total = cluster.GroupedTweets.Select(vector => vector.VectorSpace.ElementAt(j).Value).Sum();
 
                         // identify vector space key of first tweet vector in this cluster
-                        key = centroid.GroupedTweets[0].VectorSpace.Keys.ElementAt(j);
+                        key = cluster.GroupedTweets[0].VectorSpace.Keys.ElementAt(j);
 
                         // compute mean and update vector space values (key position = j)
-                        centroid.GroupedTweets[0].VectorSpace[key] = total / centroid.GroupedTweets.Count;
-                    }
+                        cluster.GroupedTweets[0].VectorSpace[key] = total / cluster.GroupedTweets.Count;
+                    }*/
                 }
-                return centroid;
+                return cluster;
             }).ToList();
             return clusterCenter;
         }

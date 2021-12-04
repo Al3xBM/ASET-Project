@@ -24,7 +24,7 @@ namespace ClusteringComponent.Controllers
         [HttpPost("clusterized")]
         public string SendClusteredData(object _tweet)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\ionut\Documents\GitHub\ASET-Project\VisualTwitter\DataManipulationService\WriteLines.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\WriteLines.txt");
             List<Tweet> tweets = new();
             int i = 0;
             foreach (string line in lines)

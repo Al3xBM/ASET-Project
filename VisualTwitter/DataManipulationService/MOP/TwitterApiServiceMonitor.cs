@@ -11,9 +11,22 @@ using System.Threading.Tasks;
 
 namespace DataManipulationService.MOP
 {
+
     [Serializable]
     public class TwitterApiServiceMonitor : OnMethodBoundaryAspect
     {
+        //public override void OnResume(MethodExecutionArgs args)
+        //{
+        //    var temp = args.YieldValue;
+
+        //    base.OnResume(args);
+        //}
+
+        //public override void OnYield(MethodExecutionArgs args)
+        //{
+        //    base.OnYield(args);
+        //}
+
         [NonSerialized]
         Stopwatch stopwatch;
         public override void OnEntry(MethodExecutionArgs args)
@@ -28,7 +41,7 @@ namespace DataManipulationService.MOP
                     int val = -1;
 
                     if (!(int.TryParse(methodArgs.First().ToString(), out val) && val > 0))
-                    File.AppendAllText("mop.txt", "GetTrendingAsync wrong call \n");
+                        File.AppendAllText("mop.txt", "GetTrendingAsync wrong arguments \n");
                 }
                 else
                 {
@@ -41,8 +54,7 @@ namespace DataManipulationService.MOP
                 File.AppendAllText("mop.txt", "GetAvailableTrendsAsync called successfully \n");
             }
             if(args.Method.Name == "GetTweetsSample")
-            {
-                
+            {               
                 File.AppendAllText("mop.txt", "GetTweetsSample called successfully \n");
             }
 

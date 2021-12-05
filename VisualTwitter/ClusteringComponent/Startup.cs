@@ -1,3 +1,5 @@
+using ClusteringComponent.Interfaces;
+using ClusteringComponent.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +27,10 @@ namespace ClusteringComponent
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClusteringComponent", Version = "v1" });
             });
+
+            services.AddTransient<IDatabaseConnection, DatabaseConnection>();
+            services.AddTransient<IDatabaseService, DatabaseService>();
+            services.AddSingleton<IClusterAlgorithm, ClusterAlgorithm>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

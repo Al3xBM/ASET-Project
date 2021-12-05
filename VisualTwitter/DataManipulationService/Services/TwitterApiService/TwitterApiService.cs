@@ -17,6 +17,8 @@ namespace DataManipulationService.Services.TwitterApiService
     {
         private readonly ITwitterConnection _twitterConnection;
         private readonly IDatabaseService _databaseService;
+        private static List<string> WhitelistIds = new List<string>() { "27667187", "50323173", "74518740", "19923144" };
+
         public TwitterApiService(ITwitterConnection twitterConnection, IDatabaseService databaseService)
         {
             _twitterConnection = twitterConnection;
@@ -26,20 +28,13 @@ namespace DataManipulationService.Services.TwitterApiService
         public async Task<List<Tweet>> GetTweetsSample()
         {
             var tweetsSample = new List<Tweet>();
-                        HttpClient client = _twitterConnection.GetTwitterClient();
-                        string url = "2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
-                        var response = await client.GetStreamAsync(url);
-            //var url = "https://api.twitter.com/2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
+            HttpClient client = _twitterConnection.GetTwitterClient();
+            string url = "2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
+            var response = await client.GetStreamAsync(url);
 
-            //var httpRequest = (HttpWebRequest)WebRequest.Create(url);
-            
-            //httpRequest.Headers["Authorization"] = "Bearer AAAAAAAAAAAAAAAAAAAAADNBVAEAAAAAbPgNZMC0c6Xi36hhzeXSHCybMrw%3DLUJeo7KwkSr547hIYi8j7Km9c9mhMBlpIJd7zhcdbghtKViulX";
-            
-            //var httpResponse = (HttpWebResponse)httpRequest.GetResponse();
-            string buffer = "";
             using (var streamReader = new StreamReader(response))
             {
-                int count = 5;
+                int count = 7500;
                 while(count > 0)
                 {
                     var result = streamReader.ReadLine();
@@ -58,8 +53,8 @@ namespace DataManipulationService.Services.TwitterApiService
                     
 
                     var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
-
-                    if (tweet.entities.hashtags != null && tweet.lang=="en")
+                    // tweet.entities.hashtags != null && 
+                    if (tweet.lang=="en")
                     {
                         _databaseService.insertTweet(tweet);
                         tweetsSample.Add(tweet);
@@ -92,6 +87,38 @@ namespace DataManipulationService.Services.TwitterApiService
             HttpResponseMessage response = await client.GetAsync(url);
             return await response.Content.ReadAsStringAsync();
         }
-        
+
+        public async Task<List<Tweet>> SearchWhitelistedUsersTweets()
+        {
+            HttpClient client = _twitterConnection.GetTwitterClient();
+            List<Tweet> tweets = new List<Tweet>();
+
+            foreach (string userId in WhitelistIds)
+            {
+                string url = $"2/users/" + userId + $"/tweets?exclude=retweets,replies&max_results=50";
+                HttpResponseMessage httpResponse = await client.GetAsync(url);
+
+                string response = await httpResponse.Content.ReadAsStringAsync();
+                JObject initialData = null;
+
+                try
+                {
+                    if (response == "")
+                        continue;
+
+                    initialData = JObject.Parse(response);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                tweets.AddRange((List<Tweet>)JsonConvert.DeserializeObject<List<Tweet>>(initialData["data"].ToString()));
+            }
+
+            _databaseService.insertWhitelistedTweets(tweets);
+
+            return tweets;
+        }
     }
 }

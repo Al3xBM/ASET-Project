@@ -9,51 +9,36 @@ using UserService.Models;
 using System.Diagnostics;
 
 using System.Linq;
+using ClusteringComponent.Interfaces;
+
 namespace ClusteringComponent.Controllers
 {
     public class ClusterController : ControllerBase
     {
-        /*
-        private ClusterProcessing _clusterProcessing;
 
-        public ClusterController(ClusterProcessing _clusterProcessing)
+        private IClusterAlgorithm _clusterAlgorithm;
+
+        public ClusterController(IClusterAlgorithm clusterAlgorithm)
         {
-            
+            _clusterAlgorithm = clusterAlgorithm;
         }
-        */
+
         [HttpPost("clusterized")]
-        public string SendClusteredData(object _tweet)
+        public IActionResult SendClusteredData(string topic)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"E:\aset repo\ASET-Project\VisualTwitter\DataManipulationService\WriteLines.txt");
-            List<Tweet> tweets = new();
-            int i = 0;
-            foreach (string line in lines)
-            {
-                JObject json = JObject.Parse(line);
-
-                //Console.WriteLine("i = " + i++);
-
-                var urls = json["data"]["entities"]["urls"];
-                tweets.Add(new Tweet()
-                {
-                    Content = (string)json["data"]["text"],
-                    Url = urls == null ? "" : (string)urls[0]["expanded_url"]
-                });
-            }
-
-            Debug.WriteLine("lines = " + lines.Length);
-
-            TweetCollection collection = new TweetCollection();
-            collection.SetTweetList(tweets);
-
-            TweetsProcessing processing = new TweetsProcessing(collection);
-            processing.SetTweetCollection();
-
-            List<Cluster> clusters = ClusterAlgorithm.PrepareTweetCluster(2, collection.GetTweetVectors());
+           List<Cluster> clusters = _clusterAlgorithm.PrepareTweetCluster(topic);
 
             Debug.WriteLine("clusters = " + clusters.Count);
 
-            return "DONE";
+            return Ok("DONE");
+        }
+
+        [HttpGet("loadCollection")]
+        public IActionResult LoadCollection()
+        {
+            _clusterAlgorithm.LoadCollection();
+
+            return Ok("Loaded");
         }
     }
 }

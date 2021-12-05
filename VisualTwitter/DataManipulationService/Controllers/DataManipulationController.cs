@@ -1,4 +1,5 @@
 ﻿using DataManipulationService.Interfaces;
+using DataManipulationService.MOP;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -21,20 +22,22 @@ namespace DataManipulationService.Controllers
         }
 
         [HttpGet("trending/{region}")]
+        [TwitterApiServiceMonitor]
         public async Task<IActionResult> GetTrending(string region)
         {
-            
-
             try
             {
                 var availableTrendsResponse = await _twitterApiService.GetAvailableTrendsAsync();
+
                 if(availableTrendsResponse.Contains("errors"))
                     return BadRequest(new { message = "Bad Request" });
+
                 if (!availableTrendsResponse.Contains($"{region}"))
                     return NotFound(new { message = "No trends available for the specified region" });
-                string woeid = "";
 
+                string woeid = "";
                 dynamic availableTrends = JsonConvert.DeserializeObject(availableTrendsResponse);
+
                 foreach(var trend in availableTrends)
                 {
                     if (trend["country"] == region)
@@ -43,11 +46,12 @@ namespace DataManipulationService.Controllers
                         break;
                     }
                 }
+
                 var trendsList = await _twitterApiService.GetTrendingAsync(woeid);
+
                 if (trendsList.Contains("errors"))
-                {
                     return BadRequest(new { message = " Bad Request on GetTrendingAsync" });
-                }
+
                 return Ok(trendsList);
             }
             catch (JsonException ex)
@@ -62,6 +66,17 @@ namespace DataManipulationService.Controllers
             var responseBody = await _twitterApiService.GetTweetsSample();
 
             return null;
+        }
+
+        [HttpGet("whitelisted")]
+        public async Task<IActionResult> SearchWhitelistedUsersTweets()
+        {
+            var responseBody = await _twitterApiService.SearchWhitelistedUsersTweets();
+
+            if(responseBody != null)
+                return Ok(responseBody);
+
+            return BadRequest(new { message = "No tweets found." });
         }
     }
 }

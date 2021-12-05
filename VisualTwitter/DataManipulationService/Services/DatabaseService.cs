@@ -19,9 +19,13 @@ namespace DataManipulationService.Services
             _database = databaseConnection.getDatabaseConnection("VisualTwitter");
         }
         public void insertTweet(Tweet tweet)
+        { 
+            _database.GetCollection<Tweet>("Tweets").InsertOne(tweet);
+        }
+
+        public void insertWhitelistedTweets(List<Tweet> tweets)
         {
-            var collection = _database.GetCollection<Tweet>("Tweets");
-            collection.InsertOne(tweet);
+            _database.GetCollection<Tweet>("WhitelistedTweets").InsertMany(tweets);
         }
     }
 }

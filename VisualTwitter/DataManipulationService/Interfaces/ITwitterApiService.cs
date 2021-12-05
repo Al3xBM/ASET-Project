@@ -11,5 +11,7 @@ namespace DataManipulationService.Interfaces
         public Task<List<Tweet>> GetTweetsSample();
 
         public Task<string> GetAvailableTrendsAsync();
+
+        public Task<List<Tweet>> SearchWhitelistedUsersTweets();
     }
 }

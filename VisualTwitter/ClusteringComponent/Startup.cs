@@ -30,6 +30,7 @@ namespace ClusteringComponent
 
             services.AddTransient<IDatabaseConnection, DatabaseConnection>();
             services.AddTransient<IDatabaseService, DatabaseService>();
+            services.AddTransient<IPostProcessing, PostProcessing>();
             services.AddSingleton<IClusterAlgorithm, ClusterAlgorithm>();
         }
 

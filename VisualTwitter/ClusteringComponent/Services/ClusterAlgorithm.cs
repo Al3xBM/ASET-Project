@@ -11,7 +11,7 @@ namespace ClusteringComponent.Services
     // K-Means Algorithm Implementation
     public class ClusterAlgorithm : IClusterAlgorithm
     {
-        private readonly int MAX_ITERATIONS = 1000;
+        private readonly int MAX_ITERATIONS = 5000;
         private readonly int clusterCount = 5; 
         private readonly IDatabaseService _databaseService;
         public TweetCollection Collection { get; set; }
@@ -26,11 +26,13 @@ namespace ClusteringComponent.Services
         {
             Collection = new TweetCollection();
             Collection.TweetList = _databaseService.GetTweetSample();
+            Collection.TweetList.AddRange(_databaseService.GetWhitelistedTweets());
+
             TweetsProcessing tweetsProcessing = new TweetsProcessing(Collection);
             tweetsProcessing.CreateTweetVectors();
         }
 
-        public List<Tweet> FilterWhitelistedTweets(string topic)
+        public List<TweetVector> FilterWhitelistedTweets(string topic)
         {
             List<Tweet> tweets = _databaseService.GetWhitelistedTweets();
             List<string> topicWords = topic.ToLower().Split(" ").ToList();
@@ -48,19 +50,26 @@ namespace ClusteringComponent.Services
             }
 
             if (wordMatchCount.Values.Max() == 0)
-                return new List<Tweet>();
+                return new List<TweetVector>();
 
-            List<Tweet> returnTweets = new List<Tweet>();
+            List<Tweet> filteredTweets = new List<Tweet>();
             for(int i = 0; i < 3; ++i)
             {
                 if (wordMatchCount.Values.Max() == 0)
                     break;
 
-                returnTweets.Add(wordMatchCount.Select(x => x.Key).Where(x => wordMatchCount[x] == wordMatchCount.Values.Max()).FirstOrDefault());
-                wordMatchCount.Remove(returnTweets[i]);
+                filteredTweets.Add(wordMatchCount.Select(x => x.Key).Where(x => wordMatchCount[x] == wordMatchCount.Values.Max()).FirstOrDefault());
+                wordMatchCount.Remove(filteredTweets[i]);
             }
 
-            return returnTweets;
+            List<TweetVector> returnTweets = new List<TweetVector>();
+
+            foreach(var tweet in filteredTweets)
+            {
+                returnTweets.Add(Collection.TweetVectors.FirstOrDefault(x => x.Content == tweet.text));
+            }
+
+            return returnTweets;// Collection.TweetVectors.Where(x => returnTweets.Select(y => y.text == x.Content).Any()).ToList();
         }
 
         public List<Cluster> PrepareTweetCluster(string topic)
@@ -79,11 +88,8 @@ namespace ClusteringComponent.Services
                 uniqRand.Add(rng.Next(0, Collection.TweetList.Count));
             }
 
-            TweetCollection whitelistCollection = new TweetCollection();
-            whitelistCollection.TweetList = FilterWhitelistedTweets(topic);
-            int whitelistCount = whitelistCollection.TweetList.Count;
-            TweetsProcessing tweetsProcessing = new TweetsProcessing(whitelistCollection);
-            tweetsProcessing.CreateTweetVectors();
+            List<TweetVector> whitelistVectors = FilterWhitelistedTweets(topic);
+            int whitelistCount = whitelistVectors.Count;
 
             centroidCollection = uniqRand.Select(i =>
             {
@@ -91,17 +97,14 @@ namespace ClusteringComponent.Services
                 {
                     GroupedTweets = new List<TweetVector>()
                 };
-                for(int j = 0; j < whitelistCount; ++j)
+                for(int j = 0; j < whitelistVectors.Count; ++j)
                     centroid.GroupedTweets.Add(Collection.TweetVectors[i + j]);
                 
                 return centroid;
             }).ToList();
 
-            centroidCollection[0].GroupedTweets = whitelistCollection.TweetVectors;
-            List<Cluster> prevClusterCendroid = new List<Cluster>(centroidCollection);
-
-            foreach (var cluster in prevClusterCendroid)
-                Collection.TweetVectors.Remove(cluster.GroupedTweets[0]);
+            centroidCollection[0].GroupedTweets = whitelistVectors;
+            List<Cluster> whitelistCentroid = new List<Cluster>(centroidCollection);
 
             List<Cluster> resultSet = null;
 
@@ -122,18 +125,14 @@ namespace ClusteringComponent.Services
                 centroidCollection = CalculateMeanPoints(resultSet);
 
                 for(int i = 0; i < whitelistCount; ++i)
-                    centroidCollection[0].GroupedTweets.Insert(0, prevClusterCendroid[0].GroupedTweets[i]);
+                    centroidCollection[0].GroupedTweets.Insert(0, whitelistCentroid[0].GroupedTweets[i]);
 
 
             } while (iterationNumber != MAX_ITERATIONS);
 
-            resultSet[0].GroupedTweets = resultSet[0].GroupedTweets.OrderBy(x => x.VectorSpace.Values.Sum()).ToList();
-            resultSet[1].GroupedTweets = resultSet[1].GroupedTweets.OrderBy(x => x.VectorSpace.Values.Sum()).ToList();
-            resultSet[2].GroupedTweets = resultSet[2].GroupedTweets.OrderBy(x => x.VectorSpace.Values.Sum()).ToList();
-            resultSet[3].GroupedTweets = resultSet[3].GroupedTweets.OrderBy(x => x.VectorSpace.Values.Sum()).ToList();
-            resultSet[4].GroupedTweets = resultSet[4].GroupedTweets.OrderBy(x => x.VectorSpace.Values.Sum()).ToList();
+            resultSet[0].GroupedTweets.AddRange(whitelistVectors);
 
-            return centroidCollection;
+            return resultSet;
         }
 
         public void InitializeClusterCentroid(out List<Cluster> centroidList, int count)
@@ -163,7 +162,7 @@ namespace ClusteringComponent.Services
 
                     double max = 0;
                     for (int i = 0; i < tweetsInCentroid; ++i)
-                        max = Math.Max(computeSimilarityFunc(centroid.GroupedTweets[0].VectorSpace.Values, obj.VectorSpace.Values), max);
+                        max = Math.Max(computeSimilarityFunc(centroid.GroupedTweets[i].VectorSpace.Values, obj.VectorSpace.Values), max);
 
                     return max;
                 }).ToList();

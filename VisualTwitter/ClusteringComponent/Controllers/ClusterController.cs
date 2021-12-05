@@ -10,6 +10,7 @@ using System.Diagnostics;
 
 using System.Linq;
 using ClusteringComponent.Interfaces;
+using ClusteringComponent.DataTransferObjects;
 
 namespace ClusteringComponent.Controllers
 {
@@ -17,20 +18,21 @@ namespace ClusteringComponent.Controllers
     {
 
         private IClusterAlgorithm _clusterAlgorithm;
+        private IPostProcessing _postProcessing;
 
-        public ClusterController(IClusterAlgorithm clusterAlgorithm)
+        public ClusterController(IClusterAlgorithm clusterAlgorithm, IPostProcessing postProcessing)
         {
             _clusterAlgorithm = clusterAlgorithm;
+            _postProcessing = postProcessing;
         }
 
         [HttpPost("clusterized")]
         public IActionResult SendClusteredData(string topic)
         {
-           List<Cluster> clusters = _clusterAlgorithm.PrepareTweetCluster(topic);
+            List<Cluster> clusters = _clusterAlgorithm.PrepareTweetCluster(topic);
+            SearchResultsDTO dto = _postProcessing.ProcessResults(clusters[0], topic);
 
-            Debug.WriteLine("clusters = " + clusters.Count);
-
-            return Ok("DONE");
+            return Ok(dto);
         }
 
         [HttpGet("loadCollection")]

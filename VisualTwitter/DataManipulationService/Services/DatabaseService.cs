@@ -25,7 +25,15 @@ namespace DataManipulationService.Services
 
         public void insertWhitelistedTweets(List<Tweet> tweets)
         {
-            _database.GetCollection<Tweet>("WhitelistedTweets").InsertMany(tweets);
+            var collection = _database.GetCollection<Tweet>("WhitelistedTweets");
+            foreach (var tweet in tweets)
+            {
+                if (!collection.Find(x => x.id == tweet.id).Any())
+                {
+                    collection.InsertOne(tweet);
+                }    
+            }
+            //_database.GetCollection<Tweet>("WhitelistedTweets").InsertMany(tweets);
         }
     }
 }

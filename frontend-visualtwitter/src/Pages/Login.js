@@ -7,8 +7,8 @@ import { Box, FormControl, TextField, Button } from '@mui/material';
 const LoginPage = () => {
     // const navigate = useNavigate();
     const [state, setState] = useState({
-        "email": "",
-        "password": ""
+        "Email": "",
+        "Password": ""
     })
     const handleEmailChange = (e) => {
         var email = e.target.value;

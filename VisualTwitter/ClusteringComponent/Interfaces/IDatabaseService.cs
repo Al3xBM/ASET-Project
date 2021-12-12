@@ -11,5 +11,8 @@ namespace ClusteringComponent.Interfaces
         public List<Tweet> GetTweetSample();
 
         public List<Tweet> GetWhitelistedTweets();
+
+        public List<Tweet> GetBasketballTweets();
+
     }
 }

@@ -35,5 +35,11 @@ namespace DataManipulationService.Services
             }
             //_database.GetCollection<Tweet>("WhitelistedTweets").InsertMany(tweets);
         }
+
+        public void insertBasketballTweets(Tweet tweet)
+        {
+            _database.GetCollection<Tweet>("BasketballSample").InsertOne(tweet);// .InsertMany(tweets);
+        }
+
     }
 }

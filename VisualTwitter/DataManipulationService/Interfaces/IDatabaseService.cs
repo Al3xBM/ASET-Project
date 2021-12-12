@@ -11,5 +11,7 @@ namespace DataManipulationService.Interfaces
         public void insertTweet(Tweet tweet);
 
         public void insertWhitelistedTweets(List<Tweet> tweets);
+
+        public void insertBasketballTweets(Tweet tweets);
     }
 }

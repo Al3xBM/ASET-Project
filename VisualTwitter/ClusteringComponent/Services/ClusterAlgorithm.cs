@@ -25,7 +25,7 @@ namespace ClusteringComponent.Services
         public void LoadCollection()
         {
             Collection = new TweetCollection();
-            Collection.TweetList = _databaseService.GetTweetSample();
+            Collection.TweetList = _databaseService.GetBasketballTweets();
             Collection.TweetList.AddRange(_databaseService.GetWhitelistedTweets());
 
             TweetsProcessing tweetsProcessing = new TweetsProcessing(Collection);

@@ -18,6 +18,11 @@ namespace ClusteringComponent.Services
             _database = databaseConnection.getDatabaseConnection("VisualTwitter");
         }
 
+        public List<Tweet> GetBasketballTweets()
+        {
+            return _database.GetCollection<Tweet>("BasketballSample").Find(_ => true).Limit(1000).ToList();
+        }
+
         public List<Tweet> GetTweetSample()
         {
             return _database.GetCollection<Tweet>("Tweets").Find(_ => true).Limit(1000).ToList();

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DataManipulationService.Services.TwitterApiService
@@ -29,12 +30,22 @@ namespace DataManipulationService.Services.TwitterApiService
         {
             var tweetsSample = new List<Tweet>();
             HttpClient client = _twitterConnection.GetTwitterClient();
-            string url = "2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
-            var response = await client.GetStreamAsync(url);
 
+            #region comments
+
+            // ChangeRulesAsync();
+            // string url = "2/tweets/sample/stream?tweet.fields=public_metrics,entities,lang";
+            // string url = "2/tweets/search/stream/rules";
+
+            #endregion
+
+            string url = "2/tweets/search/stream";
+
+            var response = await client.GetStreamAsync(url);
+ 
             using (var streamReader = new StreamReader(response))
             {
-                int count = 7500;
+                int count = 20000;
                 while(count > 0)
                 {
                     var result = streamReader.ReadLine();
@@ -53,21 +64,68 @@ namespace DataManipulationService.Services.TwitterApiService
                     
 
                     var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
-                    // tweet.entities.hashtags != null && 
-                    if (tweet.lang=="en")
-                    {
-                        _databaseService.insertTweet(tweet);
-                        tweetsSample.Add(tweet);
-                        File.AppendAllLines("WriteLines.txt", new List<string>() { result });
-                        --count;
-                    }
-                    
+                    _databaseService.insertBasketballTweets(tweet);
+                    tweetsSample.Add(tweet);
+                    --count;
                 }
 
             }
 
-            //Console.WriteLine(httpResponse.StatusCode);
+            // _databaseService.insertBasketballTweets(tweetsSample);
             return tweetsSample;
+        }
+
+        public async Task ChangeRulesAsync()
+        {
+            HttpClient client = _twitterConnection.GetTwitterClient();
+            Dictionary<string, List<Dictionary<string, string>>> rules = new Dictionary<string, List<Dictionary<string, string>>>()
+                {
+                    {
+                        "add", new List<Dictionary<string, string>>()
+                        {
+                            new Dictionary<string, string>()
+                            {
+                                {"value", "#basketball lang:en" },
+                                { "tag", "basketball" }
+                            },
+                            new Dictionary<string, string>()
+                            {
+                                {"value", "#basket lang:en" },
+                                { "tag", "basketball" }
+                            },
+                            new Dictionary<string, string>()
+                            {
+                                {"value", "#nba lang:en" },
+                                { "tag", "basketball" }
+                            }
+                        }
+                    }
+                };
+
+            #region comments
+
+            /*                     
+            Dictionary<string, Dictionary<string, List<string>>> rules = new Dictionary<string, Dictionary<string, List<string>>>()
+                {
+                    {
+                        "delete",  new Dictionary<string, List<string>>
+                        {
+                            { "ids", new List<string>
+                                {
+                                    "1469645547757781003", "1469645547757781004", "1469645547757781002"
+                                }
+                            }
+                        }
+                    }
+                };
+            */
+
+            #endregion
+
+            var json = System.Text.Json.JsonSerializer.Serialize(rules);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var postResponse = await client.PostAsync("2/tweets/search/stream/rules", data);
+            var responseString = await postResponse.Content.ReadAsStringAsync();
         }
 
         [TwitterApiServiceMonitor]

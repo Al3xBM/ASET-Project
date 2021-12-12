@@ -11,7 +11,7 @@ namespace ClusteringComponent.Services
     // K-Means Algorithm Implementation
     public class ClusterAlgorithm : IClusterAlgorithm
     {
-        private readonly int MAX_ITERATIONS = 5000;
+        private readonly int MAX_ITERATIONS = 1000;
         private readonly int clusterCount = 5; 
         private readonly IDatabaseService _databaseService;
         public TweetCollection Collection { get; set; }

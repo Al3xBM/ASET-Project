@@ -27,7 +27,15 @@ namespace ClusteringComponent
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClusteringComponent", Version = "v1" });
             });
-
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             services.AddTransient<IDatabaseConnection, DatabaseConnection>();
             services.AddTransient<IDatabaseService, DatabaseService>();
             services.AddTransient<IPostProcessing, PostProcessing>();
@@ -47,6 +55,8 @@ namespace ClusteringComponent
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {

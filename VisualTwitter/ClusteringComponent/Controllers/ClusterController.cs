@@ -27,8 +27,9 @@ namespace ClusteringComponent.Controllers
         }
 
         [HttpPost("clusterized")]
-        public IActionResult SendClusteredData(string topic)
+        public IActionResult SendClusteredData([FromBody] ClusterizedDTO input)
         {
+            var topic = input.topic;
             List<Cluster> clusters = _clusterAlgorithm.PrepareTweetCluster(topic);
             SearchResultsDTO dto = _postProcessing.ProcessResults(clusters[0], topic);
 

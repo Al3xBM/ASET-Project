@@ -1,19 +1,26 @@
 import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {Box, TextField, FormControl, Button} from '@mui/material'
+import axios from 'axios'
 
 const RegisterPage= () =>
 {
- //   const navigate = useNavigate();
+    const navigate = useNavigate();
     const [state, setState] = useState({
-        "name": "",
+        "firstName": "",
+        "lastName": "",
         "email": "",
         "password": ""
     })
 
-    const handleNameChange = (e) => {
+    const handleFirstNameChange = (e) => {
         var name = e.target.value;
-        setState({ ...state, name: name })
+        setState({ ...state, firstName: name })
+
+    }
+    const handleLastNameChange = (e) => {
+        var name = e.target.value;
+        setState({ ...state, lastName: name })
 
     }
     const handleEmailChange = (e) => {
@@ -26,18 +33,19 @@ const RegisterPage= () =>
         setState({ ...state, password: password })
 
     }
-    // const handleSubmit = () => {
-    //         axios.post("http://localhost:8000/register", { name: state.name, email: state.email, password: state.password }, { withCredentials: true }).then(() => {
-    //             history.push("/login")
-    //         })
-    // }
+    const handleSubmit = () => {
+            axios.post("http://localhost:5000/api/v1/users/register", { "FirstName": state.firstName, "LastName": state.lastName, "Email": state.email, "Password": state.password }).then(() => {
+                navigate("/login")
+            })
+    }
     return (
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center",minHeight:"35vh" }}>
             <FormControl align="center">
-                <TextField label="Name" onChange={handleNameChange} />
+                <TextField label="First Name" onChange={handleFirstNameChange} />
+                <TextField label="Last Name" onChange={handleLastNameChange} />
                 <TextField label="Email" onChange={handleEmailChange} />
                 <TextField label="Password" onChange={handlePasswordChange} />
-                <Button variant="contained" color="primary" /*onClick={handleSubmit}*/>Register</Button>
+                <Button variant="contained" color="primary" onClick={handleSubmit}>Register</Button>
             </FormControl>
         </Box>
 

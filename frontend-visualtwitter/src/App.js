@@ -1,9 +1,13 @@
 import { Navbar } from './Components/Navbar';
+import { SearchResultTemplate1ContextProvider } from './Contexts/SearchResultTemplate1Context';
 
 
 function App() {
   return (
-     <Navbar/>
+    <SearchResultTemplate1ContextProvider>
+      <Navbar/>
+    </SearchResultTemplate1ContextProvider>
+     
   );
 }
 

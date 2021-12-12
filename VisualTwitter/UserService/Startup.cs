@@ -34,10 +34,10 @@ namespace UserService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "UserService", Version = "v1" });
             });
-            services.AddDbContext<DataContext>( options =>
+           /* services.AddDbContext<DataContext>( options =>
             {
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            });*/
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddCors(options =>
@@ -93,7 +93,8 @@ namespace UserService
             });
 
             // configure DI for application services
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IDataContext, DataContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

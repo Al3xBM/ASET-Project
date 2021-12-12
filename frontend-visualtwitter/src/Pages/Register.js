@@ -39,7 +39,7 @@ const RegisterPage= () =>
             })
     }
     return (
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center",minHeight:"35vh" }}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center",minHeight:"50vh" }}>
             <FormControl align="center">
                 <TextField label="First Name" onChange={handleFirstNameChange} />
                 <TextField label="Last Name" onChange={handleLastNameChange} />

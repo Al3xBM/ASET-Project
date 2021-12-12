@@ -13,7 +13,7 @@ const Dashboard = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("event.event: ",event.event)
-        axios.post("http://localhost:5000/clusterized", { "topic" : event.event}).then((response) => {
+        axios.post("http://localhost:5001/clusterized", { "topic" : event.event}).then((response) => {
                setSearchResult(response.data);
             })
         //setShowSearchResult(true);
@@ -23,7 +23,7 @@ const Dashboard = () => {
 
     return (
 
-        <Box sx={{ display: "flex",flexDirection:"column", alignItems: "center", justifyContent: "center", minHeight: "35vh" }}>
+        <Box sx={{ display: "flex",flexDirection:"column", alignItems: "center", justifyContent: "center", marginTop: "30px"}}>
             <FormControl>
                 <Box sx={{ display: "flex", direction: "inline" }}>
                     <TextField label="Search BasketBall event " value={event.event} required onChange={(e) => {setEvent({ ...event, event: e.target.value }) }} />
@@ -31,12 +31,9 @@ const Dashboard = () => {
                 </Box>
             </FormControl>
             <Box sx = {{display:"flex",  justifyContent: "center",flexDirection:"inline",width:"600px"}}>
-            
-            
+                <SearchResultTemplate1/>
             </Box>
-            <SearchResultTemplate1>
-
-            </SearchResultTemplate1>
+            
         </Box>
 
 

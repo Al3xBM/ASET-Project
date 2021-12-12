@@ -1,7 +1,10 @@
-﻿namespace UserService.Models
+﻿using MongoDB.Bson.Serialization.Attributes;
+
+namespace UserService.Models
 {
     public class User
     {
+        [BsonId]
         public int Id { get; set; }
 
         public string Email { get; set; }

@@ -2,9 +2,8 @@
 using DataManipulationService.MOP;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Http;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DataManipulationService.Controllers
@@ -29,7 +28,7 @@ namespace DataManipulationService.Controllers
             {
                 var availableTrendsResponse = await _twitterApiService.GetAvailableTrendsAsync();
 
-                if(availableTrendsResponse.Contains("errors"))
+                if (availableTrendsResponse == null || availableTrendsResponse.Contains("errors"))
                     return BadRequest(new { message = "Bad Request" });
 
                 if (!availableTrendsResponse.Contains($"{region}"))
@@ -38,7 +37,7 @@ namespace DataManipulationService.Controllers
                 string woeid = "";
                 dynamic availableTrends = JsonConvert.DeserializeObject(availableTrendsResponse);
 
-                foreach(var trend in availableTrends)
+                foreach (var trend in availableTrends)
                 {
                     if (trend["country"] == region)
                     {
@@ -61,11 +60,14 @@ namespace DataManipulationService.Controllers
         }
 
         [HttpGet("{topic}")]
-        public async Task<IActionResult> SearchTopic(string topic)
+        public async Task<IActionResult> SearchTopic()
         {
-            var responseBody = await _twitterApiService.GetTweetsSample();
+            string responseBody = await _twitterApiService.GetTweetsSample();
 
-            return null;
+            if (responseBody.Contains("early"))
+                return StatusCode(206);
+
+            return Ok(responseBody);
         }
 
         [HttpGet("whitelisted")]
@@ -73,7 +75,7 @@ namespace DataManipulationService.Controllers
         {
             var responseBody = await _twitterApiService.SearchWhitelistedUsersTweets();
 
-            if(responseBody != null)
+            if (responseBody != null && responseBody.Any())
                 return Ok(responseBody);
 
             return BadRequest(new { message = "No tweets found." });

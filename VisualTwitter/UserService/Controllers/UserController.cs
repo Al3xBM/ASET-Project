@@ -22,13 +22,13 @@ namespace UserService.Controllers
     {
         private IUserRepository _userRepository;
         private readonly IMapper _mapper;
-        private readonly AppSettings _appSettings;
+/*        private readonly AppSettings _appSettings;*/
 
-        public UserController(IUserRepository userRepository, IMapper mapper, IOptions<AppSettings> appSettings)
+        public UserController(IUserRepository userRepository, IMapper mapper) // , IOptions<AppSettings> appSettings)
         {
             _userRepository = userRepository;
             _mapper = mapper;
-            _appSettings = appSettings.Value;
+            // _appSettings = appSettings.Value;
         }
 
         [AllowAnonymous]
@@ -57,19 +57,19 @@ namespace UserService.Controllers
             if (user == null)
                 return Unauthorized(new { message = "Email or password is incorrect" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Id.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(7),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            };
-            var token = tokenHandler.CreateToken(tokenDescriptor);
-            var tokenString = tokenHandler.WriteToken(token);
+            /*            var tokenHandler = new JwtSecurityTokenHandler();
+                        var key = Encoding.UTF8.GetBytes(_appSettings.Secret);
+                        var tokenDescriptor = new SecurityTokenDescriptor
+                        {
+                            Subject = new ClaimsIdentity(new Claim[]
+                            {
+                                new Claim(ClaimTypes.Name, user.Id.ToString())
+                            }),
+                            Expires = DateTime.UtcNow.AddDays(7),
+                            SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                        };
+                        var token = tokenHandler.CreateToken(tokenDescriptor);*/
+            string tokenString = _userRepository.GetJWTToken(user);
 
             HttpContext.Response.Cookies.Append("JWT", tokenString);
 

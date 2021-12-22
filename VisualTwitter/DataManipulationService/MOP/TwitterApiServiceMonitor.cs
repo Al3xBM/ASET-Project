@@ -1,13 +1,10 @@
 ﻿using DataManipulationService.Models;
-using DataManipulationService.Services.TwitterApiService;
 using PostSharp.Aspects;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace DataManipulationService.MOP
 {
@@ -32,11 +29,11 @@ namespace DataManipulationService.MOP
         public override void OnEntry(MethodExecutionArgs args)
         {
             stopwatch = Stopwatch.StartNew();
-            
+
             var methodArgs = args.Arguments;
-            if(args.Method.Name == "GetTrendingAsync")
+            if (args.Method.Name == "GetTrendingAsync")
             {
-                if(methodArgs.Count != 1 && methodArgs.First() is string)
+                if (methodArgs.Count != 1 && methodArgs.First() is string)
                 {
                     int val = -1;
 
@@ -48,13 +45,13 @@ namespace DataManipulationService.MOP
                     File.AppendAllText("mop.txt", "GetTrendingAsync called successfully \n");
                 }
             }
-            if(args.Method.Name == "GetAvailableTrendsAsync")
+            if (args.Method.Name == "GetAvailableTrendsAsync")
             {
-                
+
                 File.AppendAllText("mop.txt", "GetAvailableTrendsAsync called successfully \n");
             }
-            if(args.Method.Name == "GetTweetsSample")
-            {               
+            if (args.Method.Name == "GetTweetsSample")
+            {
                 File.AppendAllText("mop.txt", "GetTweetsSample called successfully \n");
             }
 
@@ -66,7 +63,7 @@ namespace DataManipulationService.MOP
             var result = args.ReturnValue;
             if (args.Method.Name == "GetAvailableTrendsAsync" || args.Method.Name == "GetTrendingAsync")
             {
-                if( result is null || result.ToString().Contains("errors"))
+                if (result is null || result.ToString().Contains("errors"))
                 {
                     File.AppendAllText("mop.txt", $"{args.Method.Name} wrong response  \n");
                 }
@@ -75,7 +72,7 @@ namespace DataManipulationService.MOP
                     File.AppendAllText("mop.txt", $"{args.Method.Name} correct response  \n");
                 }
             }
-            if(args.Method.Name == "GetTweetsSample")
+            if (args.Method.Name == "GetTweetsSample")
             {
                 if (result is null || result.GetType() != typeof(List<Tweet>))
                 {
@@ -86,7 +83,7 @@ namespace DataManipulationService.MOP
                     File.AppendAllText("mop.txt", $"{args.Method.Name} correct response  \n");
                 }
             }
-            
+
             base.OnExit(args);
         }
 

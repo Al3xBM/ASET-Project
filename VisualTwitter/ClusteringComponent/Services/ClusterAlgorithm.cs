@@ -66,7 +66,7 @@ namespace ClusteringComponent.Services
 
             foreach(var tweet in filteredTweets)
             {
-                returnTweets.Add(Collection.TweetVectors.FirstOrDefault(x => x.Content == tweet.text));
+                returnTweets.Add(Collection.TweetVectors.FirstOrDefault(x => x != null && x.Content == tweet.text));
             }
 
             return returnTweets;// Collection.TweetVectors.Where(x => returnTweets.Select(y => y.text == x.Content).Any()).ToList();
@@ -151,14 +151,14 @@ namespace ClusteringComponent.Services
             List<double> similarityMeasureList = clusterCenter
                 .Select(centroid =>
                 {
-                    if (centroid.GroupedTweets.Count == 0)
-                        return 0;
+                    if (centroid.GroupedTweets.Count < tweetsInCentroid)
+                        return 1;
 
                     var firstExceptSecond = centroid.GroupedTweets[0].VectorSpace.Values.Except(obj.VectorSpace.Values);
                     var secondExceptFirst = obj.VectorSpace.Values.Except(centroid.GroupedTweets[0].VectorSpace.Values);
 
                     if (!firstExceptSecond.Any() && !secondExceptFirst.Any())
-                        return 1;
+                        return 0;
 
                     double max = 0;
                     for (int i = 0; i < tweetsInCentroid; ++i)
@@ -167,7 +167,7 @@ namespace ClusteringComponent.Services
                     return max;
                 }).ToList();
 
-            return similarityMeasureList.IndexOf(similarityMeasureList.Max());
+            return similarityMeasureList.IndexOf(similarityMeasureList.Min());
         }
 
         public List<Cluster> CalculateMeanPoints(List<Cluster> clusterCenter)

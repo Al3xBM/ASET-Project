@@ -1,13 +1,11 @@
 ﻿using DataManipulationService.Interfaces;
 using DataManipulationService.Models;
 using DataManipulationService.MOP;
-using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,9 +24,10 @@ namespace DataManipulationService.Services.TwitterApiService
             _databaseService = databaseService;
         }
         [TwitterApiServiceMonitor]
-        public async Task<List<Tweet>> GetTweetsSample()
+        public async Task<string> GetTweetsSample()
         {
             var tweetsSample = new List<Tweet>();
+            int count = 20000;
             HttpClient client = _twitterConnection.GetTwitterClient();
 
             #region comments
@@ -42,26 +41,26 @@ namespace DataManipulationService.Services.TwitterApiService
             string url = "2/tweets/search/stream";
 
             var response = await client.GetStreamAsync(url);
- 
+
             using (var streamReader = new StreamReader(response))
             {
-                int count = 20000;
-                while(count > 0)
+                while (count > 0)
                 {
                     var result = streamReader.ReadLine();
-                    JObject initialData=null;
-                    try {
+                    JObject initialData = null;
+                    try
+                    {
                         if (result == "")
                         {
                             continue;
                         }
-                         initialData = JObject.Parse(result);
+                        initialData = JObject.Parse(result);
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         Console.WriteLine(e.Message);
                     }
-                    
+
 
                     var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
                     _databaseService.insertBasketballTweets(tweet);
@@ -71,8 +70,10 @@ namespace DataManipulationService.Services.TwitterApiService
 
             }
 
-            // _databaseService.insertBasketballTweets(tweetsSample);
-            return tweetsSample;
+            if (count != 0)
+                return "Stopped early";
+
+            return "Sample added to database";
         }
 
         public async Task ChangeRulesAsync()
@@ -135,7 +136,7 @@ namespace DataManipulationService.Services.TwitterApiService
             string url = $"1.1/trends/place.json?id={id}";
             HttpResponseMessage response = await client.GetAsync(url);
             return await response.Content.ReadAsStringAsync();
-            
+
         }
         [TwitterApiServiceMonitor]
         public async Task<string> GetAvailableTrendsAsync()

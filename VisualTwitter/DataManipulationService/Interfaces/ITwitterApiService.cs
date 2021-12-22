@@ -8,7 +8,7 @@ namespace DataManipulationService.Interfaces
     {
         public Task<string> GetTrendingAsync(string id);
 
-        public Task<List<Tweet>> GetTweetsSample();
+        public Task<string> GetTweetsSample();
 
         public Task<string> GetAvailableTrendsAsync();
 

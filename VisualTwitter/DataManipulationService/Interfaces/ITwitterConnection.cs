@@ -4,7 +4,7 @@ namespace DataManipulationService.Interfaces
 {
     public interface ITwitterConnection
     {
-       HttpClient GetTwitterClient();
-        
+        HttpClient GetTwitterClient();
+
     }
 }

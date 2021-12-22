@@ -14,5 +14,7 @@ namespace ClusteringComponent.Interfaces
 
         public List<Tweet> GetBasketballTweets();
 
+        public List<Player> GetPlayers();
+
     }
 }

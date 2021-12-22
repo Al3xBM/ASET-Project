@@ -18,19 +18,12 @@ namespace ClusteringComponent.Services
             _database = databaseConnection.getDatabaseConnection("VisualTwitter");
         }
 
-        public List<Tweet> GetBasketballTweets()
-        {
-            return _database.GetCollection<Tweet>("BasketballSample").Find(_ => true).Limit(1000).ToList();
-        }
+        public List<Tweet> GetBasketballTweets() => _database.GetCollection<Tweet>("BasketballSample").Find(_ => true).Limit(1000).ToList();
 
-        public List<Tweet> GetTweetSample()
-        {
-            return _database.GetCollection<Tweet>("Tweets").Find(_ => true).Limit(1000).ToList();
-        }
-        
-        public List<Tweet> GetWhitelistedTweets()
-        {
-            return _database.GetCollection<Tweet>("WhitelistedTweets").Find(_ => true).ToList();
-        }
+        public List<Tweet> GetTweetSample() => _database.GetCollection<Tweet>("Tweets").Find(_ => true).Limit(3000).ToList();
+
+        public List<Tweet> GetWhitelistedTweets() => _database.GetCollection<Tweet>("WhitelistedTweets").Find(_ => true).ToList();
+
+        public List<Player> GetPlayers() => _database.GetCollection<Player>("NbaPlayers").Find(_ => true).ToList();
     }
 }

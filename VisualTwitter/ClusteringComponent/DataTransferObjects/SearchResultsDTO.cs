@@ -7,9 +7,9 @@ namespace ClusteringComponent.DataTransferObjects
 {
     public class SearchResultsDTO
     {
-        public (string Name, string Abbr) Team1 { get; set; }
+        public string Team1 { get; set; }
 
-        public (string Name, string Abbr) Team2 { get; set; }
+        public string Team2 { get; set; }
 
         public int Team1Score { get; set; }
 

@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,6 @@ namespace DataManipulationService.Services.TwitterApiService
     {
         private readonly ITwitterConnection _twitterConnection;
         private readonly IDatabaseService _databaseService;
-        private static List<string> WhitelistIds = new List<string>() { "27667187", "50323173", "74518740", "19923144" };
 
         public TwitterApiService(ITwitterConnection twitterConnection, IDatabaseService databaseService)
         {
@@ -26,7 +26,8 @@ namespace DataManipulationService.Services.TwitterApiService
         [TwitterApiServiceMonitor]
         public async Task<string> GetTweetsSample()
         {
-            var tweetsSample = new List<Tweet>();
+            List<Tweet> tweetsSample = new List<Tweet>();
+            List<string> bannedStrings = new List<string>() { " nft ", "follow train", "this post gets", "#nft", "crypto", "giveaway"};
             int count = 20000;
             HttpClient client = _twitterConnection.GetTwitterClient();
 
@@ -38,7 +39,7 @@ namespace DataManipulationService.Services.TwitterApiService
 
             #endregion
 
-            string url = "2/tweets/search/stream";
+            string url = "2/tweets/search/stream?tweet.fields=public_metrics";
 
             var response = await client.GetStreamAsync(url);
 
@@ -50,7 +51,7 @@ namespace DataManipulationService.Services.TwitterApiService
                     JObject initialData = null;
                     try
                     {
-                        if (result == "")
+                        if (result == "" || bannedStrings.Any(x => result.ToLower().Contains(x)))
                         {
                             continue;
                         }
@@ -63,7 +64,7 @@ namespace DataManipulationService.Services.TwitterApiService
 
 
                     var tweet = (Tweet)JsonConvert.DeserializeObject<Tweet>(initialData["data"].ToString());
-                    _databaseService.insertBasketballTweets(tweet);
+                    _databaseService.InsertBasketballTweets(tweet);
                     tweetsSample.Add(tweet);
                     --count;
                 }
@@ -138,6 +139,7 @@ namespace DataManipulationService.Services.TwitterApiService
             return await response.Content.ReadAsStringAsync();
 
         }
+
         [TwitterApiServiceMonitor]
         public async Task<string> GetAvailableTrendsAsync()
         {
@@ -151,10 +153,11 @@ namespace DataManipulationService.Services.TwitterApiService
         {
             HttpClient client = _twitterConnection.GetTwitterClient();
             List<Tweet> tweets = new List<Tweet>();
+            List<string> whitelistedIds = _databaseService.GetWhitelistedUsers().Select(x => x.TwitterId).ToList();
 
-            foreach (string userId in WhitelistIds)
+            foreach (string userId in whitelistedIds)
             {
-                string url = $"2/users/" + userId + $"/tweets?exclude=retweets,replies&max_results=50";
+                string url = $"2/users/" + userId + $"/tweets?exclude=retweets,replies&max_results=30";
                 HttpResponseMessage httpResponse = await client.GetAsync(url);
 
                 string response = await httpResponse.Content.ReadAsStringAsync();
@@ -175,7 +178,7 @@ namespace DataManipulationService.Services.TwitterApiService
                 tweets.AddRange((List<Tweet>)JsonConvert.DeserializeObject<List<Tweet>>(initialData["data"].ToString()));
             }
 
-            _databaseService.insertWhitelistedTweets(tweets);
+            _databaseService.InsertWhitelistedTweets(tweets);
 
             return tweets;
         }

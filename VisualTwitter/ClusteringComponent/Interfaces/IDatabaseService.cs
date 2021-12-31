@@ -16,5 +16,6 @@ namespace ClusteringComponent.Interfaces
 
         public List<Player> GetPlayers();
 
+        public List<Team> GetTeams();
     }
 }

@@ -59,7 +59,7 @@ namespace DataManipulationService.Controllers
             }
         }
 
-        [HttpGet("{topic}")]
+        [HttpGet]
         public async Task<IActionResult> SearchTopic()
         {
             string responseBody = await _twitterApiService.GetTweetsSample();

@@ -5,10 +5,12 @@ namespace DataManipulationService.Interfaces
 {
     public interface IDatabaseService
     {
-        public void insertTweet(Tweet tweet);
+        public void InsertTweet(Tweet tweet);
 
-        public void insertWhitelistedTweets(List<Tweet> tweets);
+        public void InsertWhitelistedTweets(List<Tweet> tweets);
 
-        public void insertBasketballTweets(Tweet tweets);
+        public void InsertBasketballTweets(Tweet tweets);
+
+        public List<WhitelistedUser> GetWhitelistedUsers();
     }
 }

@@ -69,7 +69,8 @@ namespace ClusteringComponent.Services
                 returnTweets.Add(Collection.TweetVectors.FirstOrDefault(x => x != null && x.Content == tweet.text));
             }
 
-            return returnTweets;// Collection.TweetVectors.Where(x => returnTweets.Select(y => y.text == x.Content).Any()).ToList();
+            return returnTweets;
+                // Collection.TweetVectors.Where(x => returnTweets.Select(y => y.text == x.Content).Any()).ToList();
         }
 
         public List<Cluster> PrepareTweetCluster(string topic)
@@ -90,6 +91,46 @@ namespace ClusteringComponent.Services
 
             List<TweetVector> whitelistVectors = FilterWhitelistedTweets(topic);
             int whitelistCount = whitelistVectors.Count;
+            List<(Tweet, TweetVector)> holdWhitelistCentroid = new List<(Tweet, TweetVector)>();
+
+            foreach(var whitelistVector in whitelistVectors)
+            {
+                int tempIdx = Collection.TweetVectors.IndexOf(whitelistVector);
+
+                if (tempIdx == -1)
+                    break;
+
+                holdWhitelistCentroid.Add((Collection.TweetList.ElementAt(tempIdx), Collection.TweetVectors.ElementAt(tempIdx)));
+                Collection.TweetVectors.RemoveAt(tempIdx);
+                Collection.TweetList.RemoveAt(tempIdx);
+            }
+
+            List<Team> teams = _databaseService.GetTeams();
+            Team team1 = null, team2 = null;
+            foreach(var word in topic.Split(" "))
+            {
+                if (team1 != null && team2 != null)
+                    break;
+
+                Team temp = teams.FirstOrDefault(x => x.Aliases.Contains(word));
+
+                if(temp != null && team1 == null)
+                    team1 = temp;
+
+                if (temp != null && team2 == null)
+                    team2 = temp;
+            }
+
+            List<string> topicWords = topic.Split(" ").ToList();
+            if(team1 != null && team2 != null)
+            {
+                topicWords.AddRange(team1.Aliases);
+                topicWords.AddRange(team2.Aliases);
+            }
+            topicWords = topicWords.Distinct().ToList();
+
+            whitelistVectors.Insert(0, new TweetVector() { Content = topic, VectorSpace = topicWords.ToDictionary(x => x, x => 0.3 )});
+            ++whitelistCount;
 
             centroidCollection = uniqRand.Select(i =>
             {
@@ -130,7 +171,9 @@ namespace ClusteringComponent.Services
 
             } while (iterationNumber != MAX_ITERATIONS);
 
-            resultSet[0].GroupedTweets.AddRange(whitelistVectors);
+            // resultSet[0].GroupedTweets.AddRange(whitelistVectors);
+            Collection.TweetList.AddRange(holdWhitelistCentroid.Select(x => x.Item1));
+            Collection.TweetVectors.AddRange(holdWhitelistCentroid.Select(x => x.Item2));
 
             return resultSet;
         }
@@ -147,7 +190,8 @@ namespace ClusteringComponent.Services
 
         public int FindClosestClusterCenter(List<Cluster> clusterCenter, TweetVector obj, int tweetsInCentroid)
         {
-            Func<IEnumerable<double>, IEnumerable<double>, double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
+            // Func<IEnumerable<double>, IEnumerable<double>, double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
+            Func<IDictionary<string, double>, IDictionary<string, double>, double> computeSimilarityFunc = TweetsProcessing.ComputeCosineSimilarity;
             List<double> similarityMeasureList = clusterCenter
                 .Select(centroid =>
                 {
@@ -162,12 +206,60 @@ namespace ClusteringComponent.Services
 
                     double max = 0;
                     for (int i = 0; i < tweetsInCentroid; ++i)
-                        max = Math.Max(computeSimilarityFunc(centroid.GroupedTweets[i].VectorSpace.Values, obj.VectorSpace.Values), max);
+                        max = Math.Max(computeSimilarityFunc(centroid.GroupedTweets[i].VectorSpace, obj.VectorSpace), max);
+                        // Math.Max(SimilarityCos(centroid.GroupedTweets[i].Content, obj.Content), max);
+
 
                     return max;
                 }).ToList();
 
             return similarityMeasureList.IndexOf(similarityMeasureList.Min());
+        }
+
+        public static double SimilarityCos(string str1, string str2)
+        {
+            str1 = str1.Trim();
+            str2 = str2.Trim();
+            if (string.IsNullOrEmpty(str1) || string.IsNullOrEmpty(str2))
+                return 0;
+
+            List<string> lstr1 = SimpParticiple(str1);
+            List<string> lstr2 = SimpParticiple(str2);
+            //Find the union
+            var strUnion = lstr1.Union(lstr2);
+            //Find the vector
+            List<int> int1 = new List<int>();
+            List<int> int2 = new List<int>();
+            foreach (var item in strUnion)
+            {
+                int1.Add(lstr1.Count(o => o == item));
+                int2.Add(lstr2.Count(o => o == item));
+            }
+
+            double s = 0;
+            double den1 = 0;
+            double den2 = 0;
+            for (int i = 0; i < int1.Count(); i++)
+            {
+                //Seeking Molecule
+                s += int1[i] * int2[i];
+                //Find the denominator (1)
+                den1 += Math.Pow(int1[i], 2);
+                //Find the denominator (2)
+                den2 += Math.Pow(int2[i], 2);
+            }
+
+            return s / (Math.Sqrt(den1) * Math.Sqrt(den2));
+        }
+
+        public static List<string> SimpParticiple(string str)
+        {
+            List<string> vs = new List<string>();
+            foreach (var item in str)
+            {
+                vs.Add(item.ToString());
+            }
+            return vs;
         }
 
         public List<Cluster> CalculateMeanPoints(List<Cluster> clusterCenter)
@@ -181,9 +273,9 @@ namespace ClusteringComponent.Services
 
                 foreach (var word in cluster.GroupedTweets[0].VectorSpace.Keys)
                 {
-                    total = cluster.GroupedTweets.Select(vector => vector.VectorSpace.ContainsKey(word) ? vector.VectorSpace[word] : 0.0).Sum();
+                    total = cluster.GroupedTweets.Select(vector => vector.VectorSpace.ContainsKey(word) ? vector.VectorSpace[word] : 0.0).Sum(); // .Count()
 
-                    cluster.GroupedTweets[0].VectorSpace[word] = total / cluster.GroupedTweets.Count;
+                    cluster.GroupedTweets[0].VectorSpace[word] = total / cluster.GroupedTweets.Select(x => x.VectorSpace.Values.Sum()).Sum();// .Count;
                 }
             }
 

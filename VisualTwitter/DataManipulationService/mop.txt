@@ -89,3 +89,13 @@ GetAvailableTrendsAsync called successfully
 GetAvailableTrendsAsync correct response  
 GetAvailableTrendsAsync called successfully 
 GetAvailableTrendsAsync correct response  
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample wrong response  
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample called successfully 
+GetTweetsSample wrong response  

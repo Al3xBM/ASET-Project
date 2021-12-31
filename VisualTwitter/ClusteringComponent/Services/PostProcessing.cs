@@ -5,14 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace ClusteringComponent.Services
 {
     public class PostProcessing : IPostProcessing
     {
-        private static string teamNames = "Boston Celtics, Brooklyn Nets, New York Knicks, Philadelphia 76ers, Toronto Raptors, Central Chicago, Cleveland Cavaliers, Detroit Pistons, Indiana Pacers, Milwaukee Bucks, Atlanta Hawks, Charlotte Hornets, Miami Heat, Orlando Magic, Washington Wizards, Denver Nuggets, Minnesota Timberwolves, Oklahoma City Thunder, Portland Trail Blazers, Utah Jazz, Pacific Golden State Warriors, Los Angeles Clippers, Los Angeles Lakers, Phoenix Suns, Sacramento Kings, Dallas Mavericks, Houston Rockets, Memphis Grizzlies, New Orleans Pelicans, San Antonio Spurs";
-
         private readonly IDatabaseService _databaseService;
 
         public PostProcessing(IDatabaseService databaseService)
@@ -28,22 +25,20 @@ namespace ClusteringComponent.Services
 
             List<string> topicWords = topic.ToLower().Split(" ").ToList();
             List<Player> players = _databaseService.GetPlayers();
-            List<(string Name, string Abbr)> teamsList = players.Select(x =>
-            (
-                x.Team.ToLower(),
-                x.TeamAbbr.ToLower()
-            )).Distinct().ToList();
-            // teamNames.ToLower().Split(", ").ToList();
+            List<Team> teams = _databaseService.GetTeams();
 
             if (topicWords.Contains("vs"))
             {
-                SearchForTeams(returnObj, topicWords, teamsList);
+                SearchForTeams(returnObj, topicWords, teams);
+                Team team1 = teams.FirstOrDefault(x => x.Name == returnObj.Team1);
+                Team team2 = teams.FirstOrDefault(x => x.Name == returnObj.Team2);
 
                 List<Player> team1Players = players.Where(x =>
-                         returnObj.Team1.Name.Equals(x.Team.ToLower())
+                        team1.Aliases.Any(y => y.Equals(x.Team) || y.Equals(x.TeamAbbr)) 
                     ).ToList();
                 List<Player> team2Players = players.Where(x =>
-                        returnObj.Team2.Name.Equals(x.Team.ToLower())
+                    team2.Aliases.Any(y => y.Equals(x.Team) || y.Equals(x.TeamAbbr))
+                    //  returnObj.Team2.Equals(x.Team.ToLower())
                     ).ToList();
 
                 List<string> relevantTweets = new List<string>();
@@ -52,15 +47,19 @@ namespace ClusteringComponent.Services
                 {
                     var lowerTweet = tweet.Content.ToLower();
 
-                    if (lowerTweet.Contains(returnObj.Team1.Name) || lowerTweet.Contains(returnObj.Team2.Name)
+                    /*                        lowerTweet.Contains(returnObj.Team1.Name) || lowerTweet.Contains(returnObj.Team2.Name)
                         || lowerTweet.Contains(returnObj.Team1.Abbr) || lowerTweet.Contains(returnObj.Team2.Abbr)
+                        || team1Players.Any(x => lowerTweet.Contains(x.FirstName) || lowerTweet.Contains(x.LastName))
+                        || team2Players.Any(x => lowerTweet.Contains(x.FirstName) || lowerTweet.Contains(x.LastName))
+                        )*/
+                    if (team1.Aliases.Any(x => lowerTweet.ToLower().Contains(x)) || team2.Aliases.Any(x => lowerTweet.ToLower().Contains(x))
                         || team1Players.Any(x => lowerTweet.Contains(x.FirstName) || lowerTweet.Contains(x.LastName))
                         || team2Players.Any(x => lowerTweet.Contains(x.FirstName) || lowerTweet.Contains(x.LastName))
                         )
                         relevantTweets.Add(lowerTweet);
                 }
 
-                SearchForMVP(returnObj, relevantTweets, team1Players, team2Players);
+                SearchForMVP(returnObj, relevantTweets, team1, team2, team1Players, team2Players);
 
                 List<int> possibleTeam1Scores = new List<int>();
                 List<int> possibleTeam2Scores = new List<int>();
@@ -69,18 +68,18 @@ namespace ClusteringComponent.Services
             return returnObj;
         }
 
-        public void SearchForTeams(SearchResultsDTO returnObj, List<string> topicWords, List<(string Name, string Abbr)> teams)
+        public void SearchForTeams(SearchResultsDTO returnObj, List<string> topicWords, List<Team> teams)
         {
             int teamsFound = 0;
 
-            foreach ((string Name, string Abbr) team in teams)
+            foreach (Team team in teams)
             {
-                if(topicWords.Contains(team.Name) || topicWords.Contains(team.Abbr))
+                if (team.Aliases.Any(x => topicWords.Contains(x)))
                 {
                     if (teamsFound == 0)
-                        returnObj.Team1 = team;
+                        returnObj.Team1 = team.Name;
                     else
-                        returnObj.Team2 = team;
+                        returnObj.Team2 = team.Name;
                     ++teamsFound;
 
                 }
@@ -90,7 +89,7 @@ namespace ClusteringComponent.Services
             }
         }
 
-        public void SearchForMVP(SearchResultsDTO returnObj, List<string> tweets, List<Player> team1Players, List<Player> team2Players)
+        public void SearchForMVP(SearchResultsDTO returnObj, List<string> tweets, Team team1, Team team2, List<Player> team1Players, List<Player> team2Players)
         {
             Dictionary<string, int> mvpLikelyhoodT1 = new Dictionary<string, int>();
             Dictionary<string, Dictionary<string, int>> playerStatsT1 = new Dictionary<string, Dictionary<string, int>>();
@@ -116,12 +115,12 @@ namespace ClusteringComponent.Services
 
                     if (scoreIndex > 0)
                     {
-                        if(CheckScoreOwner(tweetWords, scoreIndex, returnObj.Team1.Name, returnObj.Team1.Abbr))
+                        if(CheckScoreOwner(tweetWords, scoreIndex, team1))
                         {
                             returnObj.Team1Score = scores[0];
                             returnObj.Team2Score = scores[1];
                         }
-                        else if(CheckScoreOwner(tweetWords, scoreIndex, returnObj.Team2.Name, returnObj.Team2.Abbr))
+                        else if(CheckScoreOwner(tweetWords, scoreIndex, team2))
                         {
                             returnObj.Team1Score = scores[1];
                             returnObj.Team2Score = scores[0];
@@ -151,10 +150,12 @@ namespace ClusteringComponent.Services
 
         }
 
-        public bool CheckScoreOwner(List<string> words, int index, string name, string abbr)
+        public bool CheckScoreOwner(List<string> words, int index, Team team)
         {
-            return words[index - 1].Contains(name) || words[index - 1].Contains(abbr) 
-                || (index > 1 && (words[index - 2].Contains(name) || words[index - 2].Contains(abbr)));
+            return team.Aliases.Any(x => words[index - 1].Contains(x)) 
+                || (index > 1 && team.Aliases.Any(x => words[index - 2].Contains(x)));
+                // || words[index - 1].Contains(name) || words[index - 1].Contains(abbr) 
+                // || (index > 1 && (words[index - 2].Contains(name) || words[index - 2].Contains(abbr)));
         }
 
         public void ParseTweetForPlayerInfo(List<Player> players, Dictionary<string, int> mvpLikelyhood, Dictionary<string, Dictionary<string, int>> playerStats, string tweet)

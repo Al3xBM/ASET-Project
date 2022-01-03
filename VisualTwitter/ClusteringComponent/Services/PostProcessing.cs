@@ -34,10 +34,10 @@ namespace ClusteringComponent.Services
                 Team team2 = teams.FirstOrDefault(x => x.Name == returnObj.Team2);
 
                 List<Player> team1Players = players.Where(x =>
-                        team1.Aliases.Any(y => y.Equals(x.Team) || y.Equals(x.TeamAbbr)) 
+                        team1.Aliases.Any(y => y.Equals(x.Team.ToLower()) || y.Equals(x.TeamAbbr.ToLower())) 
                     ).ToList();
                 List<Player> team2Players = players.Where(x =>
-                    team2.Aliases.Any(y => y.Equals(x.Team) || y.Equals(x.TeamAbbr))
+                    team2.Aliases.Any(y => y.Equals(x.Team.ToLower()) || y.Equals(x.TeamAbbr.ToLower()))
                     //  returnObj.Team2.Equals(x.Team.ToLower())
                     ).ToList();
 
@@ -59,7 +59,7 @@ namespace ClusteringComponent.Services
                         relevantTweets.Add(lowerTweet);
                 }
 
-                SearchForMVP(returnObj, relevantTweets, team1, team2, team1Players, team2Players);
+                SearchForMatchInfo(returnObj, relevantTweets, team1, team2, team1Players, team2Players);
 
                 List<int> possibleTeam1Scores = new List<int>();
                 List<int> possibleTeam2Scores = new List<int>();
@@ -89,7 +89,7 @@ namespace ClusteringComponent.Services
             }
         }
 
-        public void SearchForMVP(SearchResultsDTO returnObj, List<string> tweets, Team team1, Team team2, List<Player> team1Players, List<Player> team2Players)
+        public void SearchForMatchInfo(SearchResultsDTO returnObj, List<string> tweets, Team team1, Team team2, List<Player> team1Players, List<Player> team2Players)
         {
             Dictionary<string, int> mvpLikelyhoodT1 = new Dictionary<string, int>();
             Dictionary<string, Dictionary<string, int>> playerStatsT1 = new Dictionary<string, Dictionary<string, int>>();
@@ -134,18 +134,24 @@ namespace ClusteringComponent.Services
                 }
             }
 
-            string mvpT1 = mvpLikelyhoodT1.Where(x => x.Value == mvpLikelyhoodT1.Values.Max()).Select(x => x.Key).FirstOrDefault();
+            int valuesCountT1 = playerStatsT1.Select(x => x.Value.Values.Count).Max();
+            string mvpT1 = mvpLikelyhoodT1.Where(x => playerStatsT1[x.Key].Values.Count == valuesCountT1).Select(x => x.Key).FirstOrDefault();
             if (!string.IsNullOrEmpty(mvpT1))
             {
-                returnObj.Team1MVP.Name = mvpT1;
-                ParseStats(returnObj.Team1MVP, playerStatsT1[mvpT1]);
+                PlayerStats stats = new PlayerStats();
+                stats.Name = mvpT1;
+                ParseStats(stats, playerStatsT1[mvpT1]);
+                returnObj.Team1MVP = stats;
             }
 
-            string mvpT2 = mvpLikelyhoodT2.Where(x => x.Value == mvpLikelyhoodT2.Values.Max() && x.Key != mvpT1).Select(x => x.Key).FirstOrDefault();
+            int valuesCountT2 = playerStatsT2.Select(x => x.Value.Values.Count).Max();
+            string mvpT2 = mvpLikelyhoodT2.Where(x => playerStatsT2[x.Key].Values.Count == valuesCountT2 && x.Key != mvpT1).Select(x => x.Key).FirstOrDefault();
             if (!string.IsNullOrEmpty(mvpT2))
             {
-                returnObj.Team2MVP.Name = mvpT2;
+                PlayerStats stats = new PlayerStats();
+                stats.Name = mvpT2;
                 ParseStats(returnObj.Team2MVP, playerStatsT2[mvpT2]);
+                returnObj.Team2MVP = stats;
             }
 
         }
@@ -160,8 +166,8 @@ namespace ClusteringComponent.Services
 
         public void ParseTweetForPlayerInfo(List<Player> players, Dictionary<string, int> mvpLikelyhood, Dictionary<string, Dictionary<string, int>> playerStats, string tweet)
         {
-            string[] stats = {"PTS", "REB", "BLK", "AST", "points", "blocks", "rebounds", "assists" };
-
+            string[] stats = {"pts", "reb", "blk", "ast", "points", "blocks", "rebounds", "assists" };
+            tweet = tweet.Replace(",", "");
             string player = players.Where(x =>
                                         x.FirstName != null && x.LastName != null &&
                                         (tweet.Contains(x.FirstName.ToLower()) || tweet.Contains(x.LastName.ToLower()))
@@ -179,20 +185,20 @@ namespace ClusteringComponent.Services
 
                 List<String> tweetWords = tweet.Split(" ").ToList();
 
-                tweetWords.Where((x, index) =>
-                {
-                    if (stats.Contains(tweetWords[index + 1]) && int.TryParse(x, out int nr))
-                    {
-                        playerStats[player][tweetWords[index + 1]] = nr;
-                    }
+                /*                tweetWords.Where((x, index) =>
+                                {
+                                    if (stats.Contains(tweetWords[index + 1]) && int.TryParse(x, out int nr))
+                                    {
+                                        playerStats[player][tweetWords[index + 1]] = nr;
+                                    }
 
-                    return true;
-                });
-/*
+                                    return true;
+                                });*/
+
                 if (tweetWords.Any(x => int.TryParse(x, out _)))
                     for (int i = 0; i < tweetWords.Count; ++i)
                         if (int.TryParse(tweetWords[i], out int nr))
-                            playerStats[player][tweetWords[i+1]] = nr;*/
+                            playerStats[player][tweetWords[i + 1]] = nr;
             }
 
             #region comments
@@ -212,17 +218,17 @@ namespace ClusteringComponent.Services
         {
             foreach(string stat in playerStats.Keys)
             {
-                if (stat.ToLower() == "points" || stat.ToLower() == "pts")
+                if (stat.ToLower().Contains("points") || stat.ToLower().Contains("pts"))
                     statsObj.Points = playerStats[stat];
 
-                if (stat.ToLower() == "rebounds" || stat.ToLower() == "reb")
-                    statsObj.Points = playerStats[stat];
+                if (stat.ToLower().Contains("rebounds") || stat.ToLower().Contains("reb"))
+                    statsObj.Rebounds = playerStats[stat];
 
-                if (stat.ToLower() == "blocks" || stat.ToLower() == "blk")
-                    statsObj.Points = playerStats[stat];
+                if (stat.ToLower().Contains("blocks") || stat.ToLower().Contains("blk"))
+                    statsObj.Blocks = playerStats[stat];
 
-                if (stat.ToLower() == "assists" || stat.ToLower() == "ast")
-                    statsObj.Points = playerStats[stat];
+                if (stat.ToLower().Contains("assists") || stat.ToLower().Contains("ast"))
+                    statsObj.Assist = playerStats[stat];
             }
         }
     }

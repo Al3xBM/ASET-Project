@@ -19,7 +19,7 @@ namespace DataManipulationService.Services
 
         public void InsertWhitelistedTweets(List<Tweet> tweets)
         {
-            IMongoCollection<Tweet> collection = _database.GetCollection<Tweet>("WhitelistedTweetsV3");
+            IMongoCollection<Tweet> collection = _database.GetCollection<Tweet>("DummyWhitelist");
             foreach (var tweet in tweets)
             {
                 if (!collection.Find(x => x.id == tweet.id).Any())

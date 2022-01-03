@@ -157,7 +157,7 @@ namespace DataManipulationService.Services.TwitterApiService
 
             foreach (string userId in whitelistedIds)
             {
-                string url = $"2/users/" + userId + $"/tweets?exclude=retweets,replies&max_results=30";
+                string url = $"2/users/" + userId + $"/tweets?exclude=retweets,replies&max_results=30&tweet.fields=public_metrics";
                 HttpResponseMessage httpResponse = await client.GetAsync(url);
 
                 string response = await httpResponse.Content.ReadAsStringAsync();

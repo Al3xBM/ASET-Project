@@ -22,7 +22,7 @@ namespace ClusteringComponent.Services
 
         public List<Tweet> GetTweetSample() => _database.GetCollection<Tweet>("Tweets").Find(_ => true).Limit(3000).ToList();
 
-        public List<Tweet> GetWhitelistedTweets() => _database.GetCollection<Tweet>("WhitelistedTweetsV3").Find(_ => true).ToList();
+        public List<Tweet> GetWhitelistedTweets() => _database.GetCollection<Tweet>("WhitelistedTweetsV4").Find(_ => true).ToList();
 
         public List<Player> GetPlayers() => _database.GetCollection<Player>("NbaPlayers").Find(_ => true).ToList();
 

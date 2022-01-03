@@ -117,7 +117,7 @@ namespace ClusteringComponent.Services
                 if(temp != null && team1 == null)
                     team1 = temp;
 
-                if (temp != null && team2 == null)
+                if (temp != null && temp.Name != team1.Name && team2 == null)
                     team2 = temp;
             }
 
@@ -174,6 +174,21 @@ namespace ClusteringComponent.Services
             // resultSet[0].GroupedTweets.AddRange(whitelistVectors);
             Collection.TweetList.AddRange(holdWhitelistCentroid.Select(x => x.Item1));
             Collection.TweetVectors.AddRange(holdWhitelistCentroid.Select(x => x.Item2));
+
+            foreach(var res in resultSet)
+            {
+                if (res.Equals(resultSet[0]))
+                    continue;
+
+                foreach (var tweet in res.GroupedTweets)
+                {
+                    if (team1.Aliases.Any(x => tweet.Content.Contains(x) || team2.Aliases.Any(x => tweet.Content.Contains(x))))
+                        resultSet[0].GroupedTweets.Add(tweet);
+
+                    if (tweet.Content.Contains("dallasma"))
+                        continue;
+                }
+            }
 
             return resultSet;
         }

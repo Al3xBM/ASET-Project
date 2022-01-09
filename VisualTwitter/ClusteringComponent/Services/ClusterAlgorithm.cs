@@ -11,7 +11,7 @@ namespace ClusteringComponent.Services
     // K-Means Algorithm Implementation
     public class ClusterAlgorithm : IClusterAlgorithm
     {
-        private readonly int MAX_ITERATIONS = 1000;
+        private readonly int MAX_ITERATIONS = 5000;
         private readonly int clusterCount = 5; 
         private readonly IDatabaseService _databaseService;
         public TweetCollection Collection { get; set; }
@@ -82,18 +82,14 @@ namespace ClusteringComponent.Services
             HashSet<int> uniqRand = new HashSet<int>();
             Random rng = new Random();
 
-
-
-            while (uniqRand.Count < clusterCount)
-            {
-                uniqRand.Add(rng.Next(0, Collection.TweetList.Count));
-            }
-
             List<TweetVector> whitelistVectors = FilterWhitelistedTweets(topic);
             int whitelistCount = whitelistVectors.Count;
             List<(Tweet, TweetVector)> holdWhitelistCentroid = new List<(Tweet, TweetVector)>();
 
-            foreach(var whitelistVector in whitelistVectors)
+            while (uniqRand.Count < clusterCount)
+                uniqRand.Add(rng.Next(0, Collection.TweetList.Count - whitelistCount));
+
+            foreach (var whitelistVector in whitelistVectors)
             {
                 int tempIdx = Collection.TweetVectors.IndexOf(whitelistVector);
 
@@ -181,13 +177,8 @@ namespace ClusteringComponent.Services
                     continue;
 
                 foreach (var tweet in res.GroupedTweets)
-                {
                     if (team1.Aliases.Any(x => tweet.Content.Contains(x) || team2.Aliases.Any(x => tweet.Content.Contains(x))))
                         resultSet[0].GroupedTweets.Add(tweet);
-
-                    if (tweet.Content.Contains("dallasma"))
-                        continue;
-                }
             }
 
             return resultSet;
@@ -290,7 +281,7 @@ namespace ClusteringComponent.Services
                 {
                     total = cluster.GroupedTweets.Select(vector => vector.VectorSpace.ContainsKey(word) ? vector.VectorSpace[word] : 0.0).Sum(); // .Count()
 
-                    cluster.GroupedTweets[0].VectorSpace[word] = total / cluster.GroupedTweets.Select(x => x.VectorSpace.Values.Sum()).Sum();// .Count;
+                    cluster.GroupedTweets[0].VectorSpace[word] = total / cluster.GroupedTweets.Select(x => x.VectorSpace.Values.Sum()).Sum(); // .Count;
                 }
             }
 

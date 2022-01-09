@@ -164,7 +164,7 @@ namespace ClusteringComponent.Services
             return vecA.Zip(vecB, (a, b) => a * b).Sum();
 
 /*            double totalSum = 0;
-            foreach(var a in vecA)
+            foreach (var a in vecA)
                 foreach (var b in vecB)
                     totalSum += a * b;
 
